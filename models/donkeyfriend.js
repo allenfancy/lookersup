@@ -26,5 +26,5 @@ var DonkeyfriendSchema = new Schema({
 
 mongoose.model('Donkeyfriend',DonkeyfriendSchema);
 
-//评论模型
+//驴友模型
 var Donkeyfriend = mongoose.model('Donkeyfriend');
