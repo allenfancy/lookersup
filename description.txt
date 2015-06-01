@@ -26,31 +26,31 @@
   ----------------------------------------------------------------------
   数据模型设计:
   用户模型:
-      id:
-      name:
-      password:
-      openId:
-      sex:
-      nickname:
-      city:
-      province:
-      country:
-      create_time:
-      update_time:
-      login_time:
-      login_account_type:
+      id:    //用户ID
+      name: //用户名
+      password: //密码
+      openId: //oauth的 openId
+      sex: //性别
+      nickname: //别名
+      city: //城市
+      province: //省份
+      country://国家
+      create_time://创建时间
+      update_time://更新时间
+      login_time://登陆时间
+      login_account_type: //登陆类型
   日记模型:
-    id:
-    title:
-    content:
-    const:
-    status:
+    id: //日记ID
+    title://标题ID
+    content://内容
+    const: //
+    status://状态
     staticsitic://统计
     comment://评论
-    create_time:
-    update_time:
-    creator_id:
-    publish_time:
+    create_time: //创建时间
+    update_time://更新时间
+    creator_id: //创建者ID
+    publish_time://发布时间
   
   评论模型:
     comment_user_id://评论的
@@ -67,12 +67,32 @@
     collection_number://收藏次数
   
   地主模型:
-  
+     id://地主ID
+     title://标题
+     title_page：//封面
+     city：//所在城市
+     application_conditions://申请条件
+     landlord_introduction://地主介绍
+     landlord_require://地主要求
+     others_reason://其他要求
+     appraise:[]//评价
+
   
   驴友模型:
-  
+      id：
+      title：
+      title_page：
+      routes：//路线
+      application_conditions：//申请条件
+      content：//具体内容
+      other_reason://其他要求
+      
   
   评价模型:(地主和驴友模块)
+    id:
+    stars:
+    content：
+    comment_id:
     
   
   
