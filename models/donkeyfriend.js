@@ -28,3 +28,5 @@ mongoose.model('Donkeyfriend',DonkeyfriendSchema);
 
 //驴友模型
 var Donkeyfriend = mongoose.model('Donkeyfriend');
+
+module.exports = Donkeyfriend;

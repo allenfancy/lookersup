@@ -16,3 +16,5 @@ mongoose.model('Appraise',AppraiseSchema);
 
 //评价模型
 var Travelnotes = mongoose.model('Appraise');
+
+module.exports = Travelnotes;

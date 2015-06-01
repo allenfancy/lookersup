@@ -37,11 +37,4 @@ mongoose.model('Travelnotes',TravelnotesSchema);
 //旅游日记
 var Travelnotes = mongoose.model('Travelnotes');
 
-//保存方法
-
-
-//按照ID获取
-
-//获取集合
-
-//修改
+module.exports = Travelnotes;

@@ -20,3 +20,5 @@ mongoose.model('Comment',CommentSchema);
 
 //评论模型
 var Comment = mongoose.model('Comment');
+
+module.exports = Comment;

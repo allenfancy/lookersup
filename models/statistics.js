@@ -19,5 +19,4 @@ mongoose.model('Statistics',StatisticsSchema);
 //统计
 var Statistics = mongoose.model('Statistics');
 
-//更新统计的数据
-
+module.exports = Statistics;

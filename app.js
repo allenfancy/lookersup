@@ -76,6 +76,12 @@ app.use(function(err, req, res, next) {
 	next();
 });
 
+require('./routes')(app);
+
+app.get('/',function(req,res){
+	res.render('login');
+});
+
 // 端口
 http.createServer(app).listen(app.get('port'), function() {
 	console.log('lookersup server listening on port : ' + app.get('port'));

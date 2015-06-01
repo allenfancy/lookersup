@@ -21,3 +21,5 @@ mongoose.model('Landlord',LandlordSchema);
 
 //地主模型
 var Landlord = mongoose.model('Landlord');
+
+module.exports = Landlord;

@@ -13,9 +13,6 @@ var UserSchema = new Schema({
 	 openId:String,
 	 sex:String,
 	 nickname:String,
-	 city:String,
-	 province:String,
-	 country:String,
 	 create_time:{type:Date,default:Date.now},
 	 update_time:{type:Date,default:Date.now},
 	 login_time:{type:Date,default:Date.now},
@@ -26,10 +23,7 @@ mongoose.model('User',UserSchema);
 
 var User = mongoose.model('User');
 
-//保存方法
 
 
 
-
-
-//获取方法
+module.exports = User;
