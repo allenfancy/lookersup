@@ -90,9 +90,9 @@
   
   评价模型:(地主和驴友模块)
     id:
-    stars:
-    content：
-    comment_id:
+    stars:   //评价星级
+    content： //内容
+    comment_id://评论人信息
     
   
   
