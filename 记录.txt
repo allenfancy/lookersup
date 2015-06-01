@@ -74,6 +74,7 @@
      application_conditions://申请条件
      landlord_introduction://地主介绍
      landlord_require://地主要求
+     others_reason://其他要求
      appraise:[]//评价
 
   
@@ -84,6 +85,7 @@
       routes：//路线
       application_conditions：//申请条件
       content：//具体内容
+      other_reason://其他要求
       
   
   评价模型:(地主和驴友模块)
