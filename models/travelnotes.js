@@ -4,6 +4,7 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
+//日记模型
 var TravelnotesSchema = new Schema({
 	title:String,
 	content:String,

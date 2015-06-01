@@ -5,6 +5,7 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
+//评价模型
 var AppraiseSchema = new Schema({
 	stars:{type:Number,default:0}
 	content:{type:String},

@@ -6,7 +6,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 
-//Schema
+//用户模型
 var UserSchema = new Schema({
 	 name:String,
 	 password:String,

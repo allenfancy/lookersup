@@ -4,6 +4,7 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
+//统计模型
 var StatisticsSchema =  new Schema({
 	browser_number:{type:Number,default:0},
 	comment_number:{type:Number,default:0},
