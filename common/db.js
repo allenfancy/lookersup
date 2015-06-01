@@ -1,6 +1,7 @@
 var mongoose = require('mongoose');
 var dbUrl = require('./config').db;
 
+
 exports.connect = function(callback){
 	mongoose.connect(dbUrl);
 };

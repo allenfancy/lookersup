@@ -25,15 +25,18 @@ var logger = require('morgan');
 
 var app = express();
 
+var mongodb = require('./common/db.js');
+
 // 设置端口
 app.set('port', process.env.PORT || 3000);
 
-// 设置views变量
-app.set('views', path.join(__dirname, 'views'));
+//设定views变量，意思是视图存放的目录
+app.set('views',path.join(__dirname,'views'));
 
-// 设置views变量，以为网页模板殷勤
-app.set('view engine', 'html');
-app.engine('.html', require('ejs').__express);
+//设定views变量，意为网页模板引擎
+app.set('view engine','html');
+app.engine('.html',require('ejs').__express);
+
 
 // 存放静态文件目录，比如本地文件
 app.use(express.static(path.join(__dirname, 'public')));
@@ -43,6 +46,26 @@ app.use(favicon(__dirname + '/public/images/favicon.ico'));
 app.use(bodyParser.urlencoded({
 	extended : false
 }));
+
+console.log('come in  app.js');
+console.log('this is mongoose :' +mongodb);
+mongodb.connect(function(err){
+	if(err){
+		console.log(err);
+		throw err;
+	}
+});
+
+app.on('colse',function(err){
+	mongodb.disconnect(function(err){
+		if(err){
+			console.log(err);
+			throw err;
+		}
+	})
+});
+
+
 
 app.use(cookieParser());
 
