@@ -1,15 +1,106 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title><%- title%></title>
-	<meta charset="utf-8">
-    <link href="/stylesheets/bootstrap.min.css" rel="stylesheet" media="screen">
-      <script src="/javascripts/jquery-2.1.1.min.js" type="text/javascript"></script>
-  </head>
+<html lang="en" class="no-js">
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title><%=title%></title>
+<link rel="stylesheet" type="text/css" href="/stylesheets/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="/stylesheets/bootstrap-responsive.min.css"/>
+
+<script src="/javascripts/swfobject.js"></script>
+<script src="/javascripts/bootstrap.min.js"></script>
+<SCRIPT type=text/javascript>
+			var cacheBuster = "?t=" + Date.parse(new Date());
+			var stageW = 960;//"100%";
+			var stageH = 330;//"100%";
+		    var attributes = {};
+		    attributes.id = 'show_pro_img';
+		    attributes.name = attributes.id;
+			var params = {};
+			params.bgcolor = "#ffffff";
+			var flashvars = {};	
+			flashvars.componentWidth = stageW;
+			flashvars.componentHeight = stageH;
+			flashvars.pathToFiles = "banner/";
+			flashvars.xmlPath = "lrtk.xml";
+			swfobject.embedSWF("/banner/preview.swf"+cacheBuster, attributes.id, stageW, stageH, "9.0.124", "/banner/expressInstall.swf", flashvars, params);			
+</SCRIPT>
+</head>
 <body>
-<div class="container web-body" style="margin-top:100px;width: 900px;">
-   <%if(user){%>
-   <%=user.name%><%}%>
+<div class="container">
+	<div class="row">
+		<div class="span12">
+			<div class="row">
+				<div class="span6">
+					<p>
+						<em>这是一个首页的LOG</em>
+					</p>
+				</div>
+				<div class="span6">
+					<div class="row-fluid">
+						<div class="span6">
+						<span><a href="#">QQ登陆</a></span>
+						<span><a href="#">微博登陆</a></span>
+						</div>
+						<div class="span6">
+						<span><a href="/login">登陆</a></span>
+						<span><a href="/register">注册</a></span>
+						</div>
+					</div>
+					
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="span12">
+			<ul class="breadcrumb">
+				<li>
+					<a href="#">首页</a> <span class="divider">/</span>
+				</li>
+				<li>
+					<a href="#">驴友日记</a> <span class="divider">/</span>
+				</li>
+				<li class="active">
+					<a href="#">找地主</a> <span class="divider">/</span>
+				</li>
+				<li>
+					<a href="#">找驴友</a> <span class="divider">/</span>
+				</li>
+				<li>
+					<a href="#">发表日记</a> <span class="divider">/</span>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<div class="row-fluid">
+		<div class="span12-fluid" style="center">
+			<DIV id="show_pro_img" style="text-align:center"></DIV>
+		</div>
+	</div>
+	<div class="row">
+		<div class="span2">
+			<p>
+				<em>Git</em>是一个分布式的版本控制系统，最初由<strong>Linus Torvalds</strong>编写，用作Linux内核代码的管理。在推出后，Git在其它项目中也取得了很大成功，尤其是在Ruby社区中。
+			</p>
+		</div>
+		<div class="span6">
+			 <span class="label">文字标签 你好 你好 你好 你好 你好hkdsjfhdskghdskjlfsah</span>
+		</div>
+		<div class="span4">
+			<p>
+				<em>Git</em>是一个分布式的版本控制系统，最初由<strong>Linus Torvalds</strong>编写，用作Linux内核代码的管理。在推出后，Git在其它项目中也取得了很大成功，尤其是在Ruby社区中。
+			</p>
+		</div>
+	</div>
+	<div class="row">
+		<div class="span12">
+			 <address><strong>@copyright for allen</strong></address>
+		</div>
+	</div>
 </div>
+
+<script src="/javascripts/gallery.js"></script>
 </body>
 </html>
