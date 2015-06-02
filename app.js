@@ -27,6 +27,8 @@ var app = express();
 
 var mongodb = require('./common/db.js');
 
+var config = require('./common/config')
+
 // 设置端口
 app.set('port', process.env.PORT || 3000);
 
@@ -68,8 +70,22 @@ app.on('colse',function(err){
 
 
 app.use(cookieParser());
-
+app.use(session({
+	secret:config.session_secret,
+	key:config.email,
+	cookie:{maxAge:1000*60*60*24*30}//30day
+}));
 app.use(flash());
+app.use(function(req,res,next){
+	res.locals.user = req.session.user;
+	var err = req.session.error;
+	res.locals.message = '';
+	if(err){
+		res.locals.message =  '<div class="alert alert-danger" style="margin-bottom: 20px;color:red;">' + err + '</div>';
+	}
+	next();
+});
+
 
 // 日志信息
 var accessLog = fs.createWriteStream('access.log', {

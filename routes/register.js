@@ -33,23 +33,23 @@ module.exports = function(app){
 		User.findOne({name:uname},function(err,doc){
 			console.log('this is name: '+uname);
 			if(err){
-				req.session.error = "网络异常！";
+			    req.session.error = "网络异常！";
+				req.flash('error','网络异常')
 				console.log(err);
-				res.redirect('/register');
+				return res.send(500);
 			}else if(doc){
-				//req.session.error = "用户名已经存在";
-				console.log('doc ..... :'+doc);
-				//res.redirect('/register');
-				res.send(404);
+				req.session.error = "用户名已经存在";
+				return res.send(500);
 			}else{
 				User.create(newUser,function(err,doc){
 					if(err){
-						res.redirect('/register');
 						console.log(err);
+						return res.redirect('/register');
 					}else{
 						console.log('come into to create user');
-					//	req.session.success = '用户创建成功!';
+					//	req.session.error = '用户创建成功!';
 					//	console.log('register error info :'+req.session.error);
+						req.session.error = '用户创建成功';
 						res.redirect('/login');//登录界面
 					}
 				});
