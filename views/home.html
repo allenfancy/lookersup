@@ -31,51 +31,7 @@
 <div class="container">
 	<div class="row">
 		<div class="span12">
-			<div class="row">
-				<div class="span6">
-					<p>
-						<em>这是一个首页的LOG</em>
-					</p>
-				</div>
-				<div class="span6">
-					<div class="row-fluid">
-						<div class="span6">
-						<%if(!user){%>
-						<span><a href="#">QQ登陆</a></span>
-						<span><a href="#">微博登陆</a></span>
-						</div>
-						<div class="span6">
-						<span><a href="/login">登陆</a></span>
-						<span><a href="/register">注册</a></span>
-						<%}else{%>
-							<span><%=user.name%></span>
-						<%}%>
-						</div>
-					</div>
-					
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="row">
-		<div class="span12">
-			<ul class="breadcrumb">
-				<li>
-					<a href="#">首页</a> <span class="divider">/</span>
-				</li>
-				<li>
-					<a href="#">驴友日记</a> <span class="divider">/</span>
-				</li>
-				<li class="active">
-					<a href="#">找地主</a> <span class="divider">/</span>
-				</li>
-				<li>
-					<a href="#">找驴友</a> <span class="divider">/</span>
-				</li>
-				<li>
-					<a href="#">发表日记</a> <span class="divider">/</span>
-				</li>
-			</ul>
+			<%- include header.html %>
 		</div>
 	</div>
 	<div class="row-fluid">
@@ -105,6 +61,5 @@
 	</div>
 </div>
 
-<script src="/javascripts/gallery.js"></script>
 </body>
 </html>

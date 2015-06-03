@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title><%=title%></title>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+
+<link rel="stylesheet" type="text/css"
+	href="/stylesheets/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css"
+	href="/stylesheets/bootstrap-responsive.min.css" />
+
+
+<script type="text/javascript" src="/javascripts/swfobject.js"></script>
+<script type="text/javascript" src="/javascripts/bootstrap.min.js"></script>
+
+<!-- 富文本编辑 -->
+<script type="text/javascript" charset="utf-8"
+	src="/ueditor/ueditor.config.js"></script>
+<script type="text/javascript" charset="utf-8"
+	src="/ueditor/ueditor.all.min.js"></script>
+<script type="text/javascript" charset="utf-8"
+	src="/ueditor/lang/zh-cn/zh-cn.js"></script>
+<script type="text/javascript" charset="utf-8"
+	src="/ueditor/third-party/jquery-1.10.2.js"></script>
+
+
+</head>
+<body>
+	<div class="container">
+		<div class="row">
+			<div class="span12"><%- include header.html %></div>
+		</div>
+		<div class="row">
+			<div class="span9">
+				<form class="form-horizontal">
+					<div class="form-group">
+						<label class="col-sm-2 control-label">标题:</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" id="title"
+								placeholder="Title" style="width: 250px">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="inputPassword" class="col-sm-2 control-label">出发地:</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" id="inputProvince"
+								placeholder="Province" style="width: 250px"> <input
+								type="text" class="form-control" id="inputCity"
+								placeholder="City" style="width: 250px">
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label for="inputPassword" class="col-sm-2 control-label">目的地:</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" id="inputArrive"
+								placeholder="ArricePlace" style="width: 250px">
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label for="inputPassword" class="col-sm-2 control-label">封面图片:</label>
+						<div class="col-sm-10">
+
+							<input type="file" class="form-control" 
+								placeholder="Password" style="width: 250px" id="coverPric">
+
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label for="inputPassword" class="col-sm-2 control-label">出发时间:</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" id="inputStartTime"
+								placeholder="出发时间" style="width: 250px">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="inputPassword" class="col-sm-2 control-label">结束时间:</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" id="inputEndTime"
+								placeholder="结束时间" style="width: 250px">
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label for="inputPassword" class="col-sm-2 control-label">人均花销</label>
+						<div class="col-sm-10">
+							<select class="form-control" style="width: 250px" id="preSpending">
+								<option>--请选择--</option>
+								<option>250以下</option>
+								<option>500以下</option>
+								<option>1000以下</option>
+								<option>10000以上</option>
+							</select>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label for="inputPassword" class="col-sm-2 control-label">出行方式:</label>
+						<div class="col-sm-10">
+							<select class="form-control" style="width: 250px" id="travelMode">
+								<option>--请选择--</option>
+								<option>自驾</option>
+								<option>报团</option>
+								<option>徒步</option>
+							</select><br>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label for="inputPassword" class="col-sm-2 control-label">内容:</label>
+						<div class="col-sm-10">
+							<script id="editor" type="text/plain"
+								style="width: 600px; height: 300px;"></script>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label for="inputPassword" class="col-sm-2 control-label">友情提示:</label>
+						<div class="col-sm-10">
+							<textarea rows="10" cols="200" id="tips" class="form-control"
+								style="width: 600px; margin-left: 0px; margin-right: 275px;">
+                </textarea>
+						</div>
+					</div>
+
+
+					<div class="form-group">
+
+						<div class="col-sm-10" style="text-align: center">
+							<input type="submit" value="确认提交" class="btn btn-info"
+								onclick="getContent()" />
+						</div>
+					</div>
+				</form>
+
+
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="span12">
+			<address>
+				<strong>@copyright for allen</strong>
+			</address>
+		</div>
+	</div>
+
+	<script type="text/javascript">
+					var ue = UE.getEditor('editor');
+					function getContent() {
+						
+						var content = UE.getEditor('editor').getContent();
+						var title = $('#title').val(),
+							province = $('#inputProvince').val(),
+						    city = $('#inputCity').val(),
+						    arrive = $('#inputArrive').val(),
+							converPric = $('#coverPric').val(),
+							startTime = $('#inputStartTime').val(),
+							endTime  = $('#inputEndTime').val(),
+							tips = 		$('#tips').val();
+						var preSpending = $('#preSpending').val();
+						var travelMode = $('#travelMode').val();
+						
+						var data = {};
+			    		$.ajax({
+			    			url:'/user/saveTravelNotes',
+			    			type:'POST',
+			    			data:data,
+			    			success:function(data,status){
+			    				if(status == 'success'){
+			    					location.href='/login';
+			    				} 
+			    			},
+			    			error:function(data,err){
+			    				location.href = '/register';
+			    			}
+			    		});
+						
+						
+					}
+				</script>
+</body>
+</html>
