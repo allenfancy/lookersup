@@ -167,18 +167,26 @@
 						var preSpending = $('#preSpending').val();
 						var travelMode = $('#travelMode').val();
 						
-						var data = {};
+						var data = {
+								"title":title,
+								"province":province,
+								"city":city,
+								"arrive":arrive,
+								"converPric":converPric,
+								"startTime":startTime,
+								"endTime":endTime,
+								"preSpending":preSpending,
+								"travelMode":travelMode,
+								"content":content,
+								"tips":tips
+						};
+						
 			    		$.ajax({
 			    			url:'/user/saveTravelNotes',
 			    			type:'POST',
 			    			data:data,
-			    			success:function(data,status){
-			    				if(status == 'success'){
-			    					location.href='/login';
-			    				} 
-			    			},
 			    			error:function(data,err){
-			    				location.href = '/register';
+			    				location.href = '/404';
 			    			}
 			    		});
 						

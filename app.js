@@ -146,7 +146,9 @@ app.use(function(err, req, res, next) {
 require('./routes')(app);
 
 app.get('/',function(req,res){
-	res.render('login');
+	res.render('home',{
+		title:'主页'
+	});
 });
 
 // 端口
