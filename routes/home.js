@@ -8,15 +8,6 @@ module.exports = function(app) {
 		});
 	});
 	
-	//
-	app.get('/user/userhome',function(req,res){
-		console.log('user center');
-		res.render('userhome',{
-			title:'用户中心',
-			user:req.session.user
-		});
-	});
-	
 	//用户发布游记
 	app.get('/user/publishTravelnotes',function(req,res){
 		res.render('publishTravelnotes',{

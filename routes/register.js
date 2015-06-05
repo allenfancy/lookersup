@@ -47,10 +47,8 @@ module.exports = function(app){
 						return res.redirect('/register');
 					}else{
 						console.log('come into to create user');
-					//	req.session.error = '用户创建成功!';
-					//	console.log('register error info :'+req.session.error);
 						req.session.error = '用户创建成功';
-						res.redirect('/login');//登录界面
+						res.send(200);//登录界面
 					}
 				});
 			}

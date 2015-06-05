@@ -35,7 +35,7 @@
 		</div>
 		<div class="row">
 			<div class="span9">
-				<form class="form-horizontal">
+				<form class="form-horizontal" >
 					<div class="form-group">
 						<label class="col-sm-2 control-label">标题:</label>
 						<div class="col-sm-10">
@@ -64,10 +64,10 @@
 					<div class="form-group">
 						<label for="inputPassword" class="col-sm-2 control-label">封面图片:</label>
 						<div class="col-sm-10">
-
+							
 							<input type="file" class="form-control" 
-								placeholder="Password" style="width: 250px" id="coverPric">
-
+								placeholder="Password" style="width: 250px" name="coverPric" id="coverPric">
+							
 						</div>
 					</div>
 
@@ -185,12 +185,16 @@
 			    			url:'/user/saveTravelNotes',
 			    			type:'POST',
 			    			data:data,
+			    			success:function(data,status){
+			    				if(status=='success'){
+			    					alert('游记发布成功!');
+			    					location.href='/user/userHome';
+			    				}
+			    			},
 			    			error:function(data,err){
 			    				location.href = '/404';
 			    			}
 			    		});
-						
-						
 					}
 				</script>
 </body>
