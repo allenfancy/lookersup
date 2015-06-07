@@ -51,8 +51,7 @@ app.use(bodyParser.urlencoded({
 	extended : false
 }));
 
-console.log('come in  app.js');
-console.log('this is mongoose :' +mongodb);
+
 mongodb.connect(function(err){
 	if(err){
 		console.log(err);

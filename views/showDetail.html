@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title><%=title%></title>
+<link rel="stylesheet" type="text/css" href="/stylesheets/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="/stylesheets/bootstrap-responsive.min.css"/>
+
+<script src="/javascripts/swfobject.js"></script>
+<script src="/javascripts/bootstrap.min.js"></script>
+
+</head>
+<body>
+<div class="container">
+	<div class="row">
+		<div class="span12">
+			<%- include header.html %>
+		</div>
+	</div>
+	<div class="row">
+		<div class="span2">
+                <%if(travelnote){ %>
+                   
+                        <div >
+                           <span>目的地:<%- travelnote.arrive_place%></span><br>
+                           <span>出发城市:<%- travelnote.start_province%>-<%- travelnote.start_city%></span><br>
+                           <span>出行时间:<%- travelnote.start_time%>~~~<%- travelnote.end_time%></span><br>
+                           <span><%- travelnote.content%></span><br>
+                           <span>友情提示:<%- travelnote.tips%></span><br>
+                          
+                        </div>
+                        <div >
+                           
+                        </div>
+                    
+                <%}%>
+            
+		</div>
+	</div>
+	<div class="row">
+		<div class="span12">
+			 <address><strong>@copyright for allen</strong></address>
+		</div>
+	</div>
+</div>
+</body>
+</html>

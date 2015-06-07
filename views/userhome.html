@@ -21,19 +21,16 @@
 	</div>
 	<div class="row">
 		<div class="span2">
-				  <ul class="spys" >
+				 
                 <%for(var i in travelnotes){ if(!travelnotes[i].title)continue;%>
-                    <li class="spys li">
                         <div >
+                        	<a><img src="<%-travelnotes[i].cover_Image%>" class="img-circle"></a>
                             <a ><%=travelnotes[i].title%></a>
-                           
-                        </div>
-                        <div >
                             <a class="btn btn-success" style="width: 120px;" target="_blank"  href="/showDetail/<%=travelnotes[i]._id%>">查看</a>
                         </div>
-                    </li>
+                    
                 <%}%>
-            </ul>
+          
 		</div>
 	</div>
 	<div class="row">

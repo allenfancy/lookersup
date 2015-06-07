@@ -10,9 +10,18 @@ module.exports = function(app) {
 	
 	//用户发布游记
 	app.get('/user/publishTravelnotes',function(req,res){
-		res.render('publishTravelnotes',{
-			title:'发布游记',
-			user:req.session.user
-		});
+		if(req.session.user){
+			res.render('publishTravelnotes',{
+				title:'发布游记',
+				user:req.session.user,
+				imageUrl:null
+			});
+		}else{
+			res.render('home',{
+				title:'主页',
+				user:null
+			})
+		}
+		
 	});
 };
