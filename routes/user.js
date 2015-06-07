@@ -1,9 +1,29 @@
 var Travelnotes = require('../models/travelnotes');
 var markdown = require('markdown').markdown;
 var fs = require('fs');
+var gm = require('gm');
+var imageMagick = gm.subClass({ imageMagick : true });
+
+/***
+ * 首先 在ubuntu 上面安装 sudo apt-get install imagemagick
+ * 
+ */
 module.exports = function(app) {
 
 	var i = 0;
+	//定义一个UUID,这个函数去给上传的图片重命名
+	function uuid() {
+        var s = [];
+        var hexDigits = "0123456789abcdef";
+        for (var i = 0; i < 36; i++) {
+            s[i] = hexDigits.substr(Math.floor(Math.random() * 0x10), 1);
+        }
+        s[14] = "4"; // bits 12-15 of the time_hi_and_version field to 0010
+        s[19] = hexDigits.substr((s[19] & 0x3) | 0x8, 1); // bits 6-7 of the clock_seq_hi_and_reserved to 01
+        s[8] = s[13] = s[18] = s[23] = "-";
+        var uuid = s.join("");
+        return uuid;
+    }
 	  
 	app.get('/user/upload',function(req,res){
 		console.log('I am come into the '+(i++));
@@ -16,7 +36,50 @@ module.exports = function(app) {
 	app.post('/user/upload', function(req, res){  
 		console.log('wo jinglai l ');
 	    if (req.files && req.files.codecsv != 'undifined') {  
-	        var temp_path = req.files.codecsv.path;  
+	    	var image_name = uuid();
+	    	//var actual_name = req.files.codecsv.name;
+	    	//actual_name.substring(actual_name.lastIndexOf('.'));
+	    	res.header('Content-Type', 'text/plain');
+	    	var path = req.files.codecsv.path;	//获取用户上传过来的文件的当前路径
+	    	var sz = req.files.codecsv.size;
+	    	console.log(path);
+	    	console.log(sz);
+
+	    	if (sz > 2*1024*1024) {
+	    		console.log('come into 1');
+	    		fs.unlink(path, function() {	//fs.unlink 删除用户上传的文件
+	    			res.end('1');
+	    		});
+	    	} /*else if (req.files.codecsv.type.split('/')[0] != 'image') {
+	    		console.log('come into 1');
+	    		fs.unlink(path, function() {
+	    			res.end('2');
+	    		});
+	    	} */else {
+	    		console.log('come into 3,4');
+	    		var target_path='./public/images/title/'+image_name+req.files.codecsv.name;
+	    		var show_path = '/images/title/'+image_name+req.files.codecsv.name;
+	    		imageMagick(path)
+	    		.resize(150, 150, '!') //加('!')强行把图片缩放成对应尺寸150*150！
+	    		.autoOrient()
+	    		.write(target_path, function(err){
+	    			if (err) {
+	    				console.log(err);
+	    				res.end();
+	    			}else{
+	    				//req.flash('imageUrl',show_path);
+	    				res.status(200).send({"data":show_path});
+	    			}
+	    			fs.unlink(path, function() {
+	    				return res.end('3');
+	    			});
+	    		});
+	    	}
+	    	
+	    	
+	    	
+	    	
+	       /* var temp_path = req.files.codecsv.path;  
 	        console.log(req.files.codecsv);
 	        console.log('temp dir: '+temp_path);
 	        var target_path = './public/images/title/'+req.files.codecsv.name;
@@ -37,7 +100,7 @@ module.exports = function(app) {
 	               
 	            });  
 	         
-	        } 
+	        } */
 	    }  
 	   
 	    /*res.session.url = target_path;*/

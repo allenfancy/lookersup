@@ -23,8 +23,8 @@
 		<div class="span2">
 				 
                 <%for(var i in travelnotes){ if(!travelnotes[i].title)continue;%>
-                        <div >
-                        	<a><img src="<%-travelnotes[i].cover_Image%>" class="img-circle"></a>
+                        <div class="span3" >
+                        	<a><img src="<%-travelnotes[i].cover_Image%>" ></a>
                             <a ><%=travelnotes[i].title%></a>
                             <a class="btn btn-success" style="width: 120px;" target="_blank"  href="/showDetail/<%=travelnotes[i]._id%>">查看</a>
                         </div>
