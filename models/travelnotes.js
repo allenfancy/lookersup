@@ -40,7 +40,8 @@ var TravelnotesSchema = new Schema({
 	comment_number:{type:Number,default:0},
 	share_number:{type:Number,default:0},
 	praise_number:{type:Number,default:0},
-	collection_number:{type:Number,default:0}
+	collection_number:{type:Number,default:0},
+	comments:[]
 });
 
 mongoose.model('Travelnotes',TravelnotesSchema);

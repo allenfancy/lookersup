@@ -5,66 +5,132 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title><%=title%></title>
-<link rel="stylesheet" type="text/css" href="/stylesheets/bootstrap.min.css" />
-<link rel="stylesheet" type="text/css" href="/stylesheets/bootstrap-responsive.min.css"/>
+<link rel="stylesheet" type="text/css"
+	href="/stylesheets/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css"
+	href="/stylesheets/bootstrap-responsive.min.css" />
 
 <script src="/javascripts/swfobject.js"></script>
 <script type="text/javascript" src="/javascripts/jquery.min.js"></script>
 <script src="/javascripts/bootstrap.min.js"></script>
+<!-- 富文本编辑 -->
+<script type="text/javascript" charset="utf-8"
+	src="/ueditor/ueditor.config.js"></script>
+<script type="text/javascript" charset="utf-8"
+	src="/ueditor/ueditor.all.min.js"></script>
+<script type="text/javascript" charset="utf-8"
+	src="/ueditor/lang/zh-cn/zh-cn.js"></script>
+<script type="text/javascript" charset="utf-8"
+	src="/ueditor/third-party/jquery-1.10.2.js"></script>
+<script type="text/javascript">
 
+var ue = UE.getEditor('editor');
+function getContent() {
+	
+	var content = UE.getEditor('editor').getContent();
+	var ids = $('#ids').val();
+	
+	var data = {
+			"ids":ids,
+			"content":content	
+	};
+	
+	$.ajax({
+		url:'/saveComment',
+		type:'POST',
+		data:data,
+		success:function(data,status){
+			if(status=='success'){
+				location.reload();
+			}
+		},
+		error:function(data,err){
+			location.href = '/404';
+		}
+	});
+}
+</script>
 </head>
-<body >
-<div class="container">
-	<div class="row">
-		<div class="span12">
-			<%- include header.html %>
+<body>
+	<div class="container">
+		<div class="row">
+			<div class="span12"><%- include header.html %></div>
 		</div>
-	</div>
-	<div class="row">
-         <!-- JiaThis Button BEGIN -->
-<div class="jiathis_style">
-<a class="jiathis_button_qzone" ></a>
-<a class="jiathis_button_tsina" ></a>
-<a class="jiathis_button_tqq" ></a>
-<a class="jiathis_button_weixin" ></a>
-<a class="jiathis_button_renren" ></a>
-<a href="http://www.jiathis.com/share?uid=2038298" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
-<a class="jiathis_counter_style"></a>
-</div>
-<script type="text/javascript" >
+		<div>
+		
+					<!-- JiaThis Button BEGIN -->
+			<div class="jiathis_style">
+				<a class="jiathis_button_qzone"></a> <a
+					class="jiathis_button_tsina"></a> <a class="jiathis_button_tqq"></a>
+				<a class="jiathis_button_weixin"></a> <a
+					class="jiathis_button_renren"></a> <a
+					href="http://www.jiathis.com/share?uid=2038298"
+					class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis"
+					target="_blank"></a> <a class="jiathis_counter_style"></a>
+			</div>
+			<script type="text/javascript">
 var jiathis_config={
 	data_track_clickback:true,
 	hideMore:false
 }
 </script>
-<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=2038298" charset="utf-8"></script>
-<!-- JiaThis Button END -->
+			<script type="text/javascript"
+				src="http://v3.jiathis.com/code/jia.js?uid=2038298" charset="utf-8"></script>
+			<!-- JiaThis Button END -->
+		</div>
+		<div class="row">
 
-		<div class="span4">
-                <%if(travelnote){ %>
-                   
-                        <div >
-                           <span>目的地:<%- travelnote.arrive_place%></span><br>
-                           <span>出发城市:<%- travelnote.start_province%>-<%- travelnote.start_city%></span><br>
-                           <span>出行时间:<%- travelnote.start_time%>~~~<%- travelnote.end_time%></span><br>
-                           <span><%- travelnote.content%></span><br>
-                           <span>友情提示:<%- travelnote.tips%></span><br>
-                          
-                        </div>
-                        <div >
-                           
-                        </div>
-                    
-                <%}%>
-            
+			<div class="span4">
+				<%if(travelnote){ %>
+
+				<div>
+				<input type="hidden" value="<%-travelnote._id%>" id="ids">
+				标题:<%- travelnote.title%>
+					<span>目的地:<%- travelnote.arrive_place%></span><br> <span>出发城市:<%-
+						travelnote.start_province%>-<%- travelnote.start_city%></span><br> <span>出行时间:<%-
+						travelnote.start_time%>~~~<%- travelnote.end_time%></span><br> <span><%-
+						travelnote.content%></span><br> <span>友情提示:<%-
+						travelnote.tips%></span><br>
+
+				</div>
+				<%}%>
+			</div>
+			
+			
+			<div>
+		
+			<hr>
+				发表评论:
+			<hr>
+			<form class="form-horizontal">
+			<div class="form-group">
+						
+						<div class="col-sm-10">
+						<script id="editor" type="text/plain"
+								style="width: 600px; height: 150px;"></script>
+						</div>
+					</div>
+			
+				<div class="form-group">
+
+						<div class="col-sm-10" style="text-align: center">
+							<input type="submit" value="确认提交" class="btn btn-info"
+								onclick="getContent()" />
+						</div>
+					</div>
+					</form>
+			
+			
+			</div>
+			
 		</div>
-			<%- include comment.html %>
-	</div>
-	<div class="row">
-		<div class="span12">
-			 <address><strong>@copyright for allen</strong></address>
+		<div class="row">
+			<div class="span12">
+				<address>
+					<strong>@copyright for allen</strong>
+				</address>
+			</div>
 		</div>
 	</div>
-</div>
 </body>
 </html>

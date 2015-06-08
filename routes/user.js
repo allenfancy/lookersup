@@ -113,8 +113,6 @@ module.exports = function(app) {
 		console.log('come into showDetails');
 		console.log('id.......:'+req.params.id)
 		Travelnotes.findOne({'_id':req.params.id},function(err,doc){
-			console.log(doc);
-			//doc.content = markdown.toHTML(doc.content);
 			console.log('這是content:'+doc.content);
 			if(doc){
 				Travelnotes.update({'_id':req.params.id},{
