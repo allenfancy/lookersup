@@ -24,7 +24,8 @@ module.exports = function(app) {
         var uuid = s.join("");
         return uuid;
     }
-	  
+	 
+	//上传图片的GET
 	app.get('/user/upload',function(req,res){
 		console.log('I am come into the '+(i++));
 		console.log('imageUrl:'+req.flash('imageUrl'));
@@ -33,6 +34,7 @@ module.exports = function(app) {
 		});
 	})
 	
+	//上传图片的POST
 	app.post('/user/upload', function(req, res){  
 		console.log('wo jinglai l ');
 	    if (req.files && req.files.codecsv != 'undifined') {  
