@@ -4,4 +4,5 @@ module.exports = function ( app ) {
     require('./register')(app);
     require('./home')(app);
     require('./user')(app);
+    require('./comment')(app);
 };

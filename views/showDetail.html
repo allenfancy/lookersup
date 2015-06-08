@@ -9,10 +9,11 @@
 <link rel="stylesheet" type="text/css" href="/stylesheets/bootstrap-responsive.min.css"/>
 
 <script src="/javascripts/swfobject.js"></script>
+<script type="text/javascript" src="/javascripts/jquery.min.js"></script>
 <script src="/javascripts/bootstrap.min.js"></script>
 
 </head>
-<body>
+<body >
 <div class="container">
 	<div class="row">
 		<div class="span12">
@@ -20,7 +21,26 @@
 		</div>
 	</div>
 	<div class="row">
-		<div class="span2">
+         <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<a class="jiathis_button_qzone" ></a>
+<a class="jiathis_button_tsina" ></a>
+<a class="jiathis_button_tqq" ></a>
+<a class="jiathis_button_weixin" ></a>
+<a class="jiathis_button_renren" ></a>
+<a href="http://www.jiathis.com/share?uid=2038298" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+	data_track_clickback:true,
+	hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=2038298" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+		<div class="span4">
                 <%if(travelnote){ %>
                    
                         <div >
@@ -38,6 +58,7 @@
                 <%}%>
             
 		</div>
+			<%- include comment.html %>
 	</div>
 	<div class="row">
 		<div class="span12">

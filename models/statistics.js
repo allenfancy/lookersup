@@ -9,7 +9,7 @@ var StatisticsSchema =  new Schema({
 	browser_number:{type:Number,default:0},
 	comment_number:{type:Number,default:0},
 	share_number:{type:Number,default:0},
-	praise_number:{type:Number,default:0},
+	praise_number:{type:Number,default:0},//赞的次数
 	collection_number:{type:Number,default:0}
 });
 

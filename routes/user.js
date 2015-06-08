@@ -1,4 +1,5 @@
 var Travelnotes = require('../models/travelnotes');
+var Statistics = require('../models/statistics');
 var markdown = require('markdown').markdown;
 var fs = require('fs');
 var gm = require('gm');
@@ -52,12 +53,7 @@ module.exports = function(app) {
 	    		fs.unlink(path, function() {	//fs.unlink 删除用户上传的文件
 	    			res.end('1');
 	    		});
-	    	} /*else if (req.files.codecsv.type.split('/')[0] != 'image') {
-	    		console.log('come into 1');
-	    		fs.unlink(path, function() {
-	    			res.end('2');
-	    		});
-	    	} */else {
+	    	}else {
 	    		console.log('come into 3,4');
 	    		var target_path='./public/images/title/'+image_name+req.files.codecsv.name;
 	    		var show_path = '/images/title/'+image_name+req.files.codecsv.name;
@@ -76,33 +72,7 @@ module.exports = function(app) {
 	    				return res.end('3');
 	    			});
 	    		});
-	    	}
-	    	
-	    	
-	    	
-	    	
-	       /* var temp_path = req.files.codecsv.path;  
-	        console.log(req.files.codecsv);
-	        console.log('temp dir: '+temp_path);
-	        var target_path = './public/images/title/'+req.files.codecsv.name;
-	        
-	        console.log(target_path);
-	        if (temp_path) {  
-	            fs.rename(temp_path,target_path, function(err) {  
-	            	var show_url = "/images/title/"+req.files.codecsv.name;
-	            	if(err){
-	            		console.log(err);
-	            	}else{
-	            		 console.log('this is ni s  ::'+target_path);
-	            		 req.flash('imageUrl',show_url);
-	            		// res.send(200,{"data":show_url});
-	            		 res.status(200).send({"data":show_url});
-	            		 //res.redirect('/user/upload');
-	            	}
-	               
-	            });  
-	         
-	        } */
+	    	}  	
 	    }   
 	  
 	});
@@ -146,6 +116,15 @@ module.exports = function(app) {
 			console.log(doc);
 			//doc.content = markdown.toHTML(doc.content);
 			console.log('這是content:'+doc.content);
+			if(doc){
+				Travelnotes.update({'_id':req.params.id},{
+					 $inc: {"browser_number": 1}
+				},function(err){
+					if(err){
+						console.log(err);
+					}
+				});
+			}
 			res.render('showDetail',{
 				title:doc.title+'詳情',
 				travelnote:doc
@@ -158,6 +137,7 @@ module.exports = function(app) {
 		console.log('进来了 ，来发布日记了');   
 		if (req.session.user) {
 			console.log(req.session.user._id);
+			
 			var travelnotes = new Travelnotes({
 				title : req.body.title,
 				start_province : req.body.province,
@@ -170,7 +150,13 @@ module.exports = function(app) {
 				travel_mode : req.body.travelMode,
 				content : req.body.content,
 				tips : req.body.tips,
-				creator_id:req.session.user._id
+				creator_id:req.session.user._id,
+				creator_name:req.session.user.nickname,
+				browser_number:0,
+				comment_number:0,
+				share_number:0,
+				praise_number:0,
+				collection_number:0
 			});
 
 			console.log(travelnotes);

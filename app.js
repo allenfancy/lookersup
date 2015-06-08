@@ -22,7 +22,7 @@ var flash = require('connect-flash');
 var fs = require('fs');
 // 日志
 var logger = require('morgan');
-
+var Travelnotes = require('./models/travelnotes');
 //富文本编辑
 var ueditor = require("ueditor");
 var app = express();
@@ -94,7 +94,8 @@ app.use("/ueditor/ue", ueditor(path.join(__dirname, 'public'), function(req, res
         var foo = req.ueditor;
         
         var imgname = req.ueditor.filename;
-
+        console.log(req.ueditor);
+        console.log('imgname:'+imgname);
         var img_url = '/images/ueditor/' ;
         res.ue_up(img_url); //你只要输入要保存的地址 。保存操作交给ueditor来做
     }
@@ -145,9 +146,19 @@ app.use(function(err, req, res, next) {
 require('./routes')(app);
 
 app.get('/',function(req,res){
-	res.render('home',{
-		title:'主页'
-	});
+	Travelnotes.find({}, null, {
+			limit : 10,
+			sort : {
+				update_time : -1
+			}
+		}, function(err, docs) {
+			// console.log(docs.length());
+			res.render('home', {
+				title : '主页',
+				user : req.session.user,
+				travelnotes : docs
+			});
+		});
 });
 
 // 端口

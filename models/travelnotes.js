@@ -35,9 +35,12 @@ var TravelnotesSchema = new Schema({
 		default:Date.now
 	},
 	creator_id:String,
-	comment:[],//评论
-	staticstic:[],//统计
-	appraise:[]//评价
+	creator_name:String,
+	browser_number:{type:Number,default:0},
+	comment_number:{type:Number,default:0},
+	share_number:{type:Number,default:0},
+	praise_number:{type:Number,default:0},
+	collection_number:{type:Number,default:0}
 });
 
 mongoose.model('Travelnotes',TravelnotesSchema);

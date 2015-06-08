@@ -1,11 +1,22 @@
+var Travelnotes = require('../models/travelnotes');
 module.exports = function(app) {
 	console.log('come into home page');
 	
 	app.get('/home', function(req, res){
-		res.render('home', {
-			title : '主页',
-			user:req.session.user
+		Travelnotes.find({}, null, {
+			limit : 10,
+			sort : {
+				update_time : -1
+			}
+		}, function(err, docs) {
+			// console.log(docs.length());
+			res.render('home', {
+				title : '主页',
+				user : req.session.user,
+				travelnotes : docs
+			});
 		});
+		
 	});
 	
 	//用户发布游记
@@ -17,10 +28,19 @@ module.exports = function(app) {
 				imageUrl:null
 			});
 		}else{
-			res.render('home',{
-				title:'主页',
-				user:null
-			})
+			Travelnotes.find({}, null, {
+				limit : 10,
+				sort : {
+					update_time : -1
+				}
+			}, function(err, docs) {
+				// console.log(docs.length());
+				res.render('home', {
+					title : '主页',
+					user : req.session.user,
+					travelnotes : docs
+				});
+			});
 		}
 		
 	});

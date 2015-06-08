@@ -30,7 +30,7 @@
 				data:data,
 				success:function(data,status){
 					if(status == 'success'){
-						location.href = '/home';
+						window.location.href=document.referrer;
 					} 
 				},
 				error:function(data,status){
