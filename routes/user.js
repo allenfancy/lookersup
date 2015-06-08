@@ -103,9 +103,7 @@ module.exports = function(app) {
 	            });  
 	         
 	        } */
-	    }  
-	   
-	    /*res.session.url = target_path;*/
+	    }   
 	  
 	});
 	
