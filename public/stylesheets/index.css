@@ -6,12 +6,12 @@
 /* 图片轮动 */
 #scroll_list { width:960px; height:326px; margin:0 auto; background:#fff; overflow:hidden; margin-top:8px; }
 #list_wrap { width:942px; margin:9px auto;  position:relative; }
-#list_wrap li { height:308px; }
+/* #list_wrap li { height:308px; }
 #list_wrap a { display:block; width:942px; height:308px; }
 #list_wrap .prev,#list_wrap .next { width:50px; height:50px; position:absolute; top:138px; }
 #list_wrap .prev { background:url(../images/left.png) no-repeat; left:10px;}
 #list_wrap .next { background:url(../images/right.png) no-repeat; right:10px;}
-
+ */
 /* 主体左侧 */
 #travel_notes { width:646px; float:left; }
 /* 游记导航 */

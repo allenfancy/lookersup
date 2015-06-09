@@ -12,7 +12,7 @@ var CommentSchema = new Schema({
 	comment_user_nickname:String,
 	comment_content:String,
 	comment_time:{
-		type:Date,
+		type:String,
 		default:moment().format("YYYY-MM-DD HH:mm")
 	},
 	//delete_flag:null//删除标志

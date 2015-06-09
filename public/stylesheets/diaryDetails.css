@@ -10,17 +10,19 @@
 .author a { color:#81be3a; }
 
 
-/* 日记内容 */
+/* 日记概要 */
 
-.diaryDetail { margin-top:12px; background:#fff; padding-bottom:30px; }
+.diaryDetail { margin-top:12px; background:#fff; padding-bottom:30px; position:relative; }
 .diaryTips { padding-bottom:72px; }
 .diaryTips ul { padding-top:44px; padding-left:30px; }
 .diaryTips li { width:294px; padding-left:10px; height:32px; line-height:32px; border-bottom:1px solid #e1e1e1; font-size:12px; color:#787878; }
 .diaryTips .tag1 { border:none; }
-.diaryTips a { color:#787878; }
-.diaryTips a:hover { color:#81bf3a; text-decoration:underline; }
-.diaryDetail p { text-align:left; padding:0 16px; text-indent:2em; line-height:30px; font-size:14px; color:#555; }
-.diaryDetail .diary_img { text-align:center; text-indent:0em; margin-bottom:15px; }
+
+/* 分享 */
+.wrap { position:absolute; top:18px; right:18px; }
+
+/* 日记内容 */
+.diaryDetail p { text-align:left; margin:0 16px; text-indent:2em; line-height:30px; font-size:14px; color:#555; overflow:hidden; }
 
 
 /* 页码 */

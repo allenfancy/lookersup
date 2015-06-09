@@ -57,17 +57,18 @@ function getContent() {
 			</p>
 			<!-- 日记内容 -->
 			<div class="diaryDetail">
-				<div class="diaryTips">
-
+				<div class="wrap">
 					<div class="jiathis_style">
-						<a class="jiathis_button_qzone"></a> <a
-							class="jiathis_button_tsina"></a> <a class="jiathis_button_tqq"></a>
+						<a class="jiathis_button_qzone"></a>
+						<a class="jiathis_button_tsina"></a> <a class="jiathis_button_tqq"></a>
 						<a class="jiathis_button_weixin"></a> <a
 							class="jiathis_button_renren"></a> <a
 							href="http://www.jiathis.com/share?uid=2038298"
 							class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis"
 							target="_blank"></a> <a class="jiathis_counter_style"></a>
 					</div>
+				</div>
+				<div class="diaryTips">
 					<script type="text/javascript">
 						var jiathis_config={
 							data_track_clickback:true,
@@ -86,10 +87,10 @@ function getContent() {
 							travelnote.end_time%></li>
 						<li>行程时间：7<%- travelnote.arrive_place%>天</li>
 						<li>人均花销：<%- travelnote.per_spending%></li>
-						<li>出行方式：<%- travelnote.travel_mode%></li>
+						<li class="tag1">出行方式：<%- travelnote.travel_mode%></li>
 					</ul>
 				</div>
-				<div style="width:600px">
+				<div class="contents">
 				<%- travelnote.content%>
 				</div>
 				<hr>
@@ -106,7 +107,7 @@ function getContent() {
 				</div>
 				<div class="textArea">
 					<form>
-						<textarea class="text" cols="88" rows="8" name="" id="contents"></textarea>
+						<textarea class="text" cols="74" rows="8" name="" id="contents"></textarea>
 						<input class="btn" type="submit" value="发表评论" name=""  onclick="getContent()"/>
 					</form>
 				</div>
