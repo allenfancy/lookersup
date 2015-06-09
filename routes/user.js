@@ -4,6 +4,7 @@ var markdown = require('markdown').markdown;
 var fs = require('fs');
 var gm = require('gm');
 var imageMagick = gm.subClass({ imageMagick : true });
+var moment = require('moment');
 
 /***
  * 首先 在ubuntu 上面安装  sudo apt-get install imagemagick
@@ -113,7 +114,7 @@ module.exports = function(app) {
 		console.log('come into showDetails');
 		console.log('id.......:'+req.params.id)
 		Travelnotes.findOne({'_id':req.params.id},function(err,doc){
-			console.log('這是content:'+doc.comments);
+		
 			if(doc){
 				Travelnotes.update({'_id':req.params.id},{
 					 $inc: {"browser_number": 1}

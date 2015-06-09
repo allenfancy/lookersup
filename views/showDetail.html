@@ -53,7 +53,7 @@ function getContent() {
 			<input type="hidden" value="<%-travelnote._id%>" id="ids">
 			<p class="author">
 				作者：<a href=""><%- travelnote.creator_name%></a>&nbsp;&nbsp;&nbsp;&nbsp;收藏0/评论<%-travelnote.comments.length
-				%>&nbsp;&nbsp;发布时间:<%-travelnote.creater_time %>&nbsp;&nbsp;
+				%>&nbsp;&nbsp;发布时间:<%-travelnote.create_time %>&nbsp;&nbsp;
 			</p>
 			<!-- 日记内容 -->
 			<div class="diaryDetail">
@@ -89,8 +89,9 @@ function getContent() {
 						<li>出行方式：<%- travelnote.travel_mode%></li>
 					</ul>
 				</div>
+				<div style="width:600px">
 				<%- travelnote.content%>
-
+				</div>
 				<hr>
 				<p>友情提示：<%- travelnote.tips%></p>
 			</div>

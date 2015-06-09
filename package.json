@@ -18,7 +18,9 @@
     	"connect-flash": "0.1.1",
     	"multer": "0.1.6",
     	"ueditor": "1.0.0",
-    	gm": "*"
+    	"gm": "*",
+    	"moment":"*"
+    	
 	}
 
 }

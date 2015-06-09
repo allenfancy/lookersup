@@ -147,7 +147,7 @@ require('./routes')(app);
 
 app.get('/',function(req,res){
 	Travelnotes.find({}, null, {
-			limit : 10,
+			//limit : 10,
 			sort : {
 				update_time : -1
 			}

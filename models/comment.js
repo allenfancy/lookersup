@@ -4,6 +4,7 @@
  * */
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
+var moment = require('moment');
 
 //评论模型
 var CommentSchema = new Schema({
@@ -12,7 +13,7 @@ var CommentSchema = new Schema({
 	comment_content:String,
 	comment_time:{
 		type:Date,
-		default:Date.now
+		default:moment().format("YYYY-MM-DD HH:mm")
 	},
 	//delete_flag:null//删除标志
 });
