@@ -9,11 +9,11 @@ module.exports = function(app) {
 				update_time : -1
 			}
 		}, function(err, docs) {
-			// console.log(docs.length());
 			res.render('home', {
 				title : '主页',
 				user : req.session.user,
-				travelnotes : docs
+				travelnotes : docs,
+				
 			});
 		});
 		

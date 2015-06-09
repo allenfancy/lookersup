@@ -5,31 +5,22 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title><%=title%></title>
+<link rel="stylesheet" type="text/css" href="/stylesheets/public.css" />
 <link rel="stylesheet" type="text/css"
-	href="/stylesheets/bootstrap.min.css" />
-<link rel="stylesheet" type="text/css"
-	href="/stylesheets/bootstrap-responsive.min.css" />
+	href="/stylesheets/diaryDetails.css" />
 
-<script src="/javascripts/swfobject.js"></script>
+
 <script type="text/javascript" src="/javascripts/jquery.min.js"></script>
-<script src="/javascripts/bootstrap.min.js"></script>
-<!-- 富文本编辑 -->
-<script type="text/javascript" charset="utf-8"
-	src="/ueditor/ueditor.config.js"></script>
-<script type="text/javascript" charset="utf-8"
-	src="/ueditor/ueditor.all.min.js"></script>
-<script type="text/javascript" charset="utf-8"
-	src="/ueditor/lang/zh-cn/zh-cn.js"></script>
-<script type="text/javascript" charset="utf-8"
-	src="/ueditor/third-party/jquery-1.10.2.js"></script>
+
+
 <script type="text/javascript">
 
-var ue = UE.getEditor('editor');
+
 function getContent() {
 	
-	var content = UE.getEditor('editor').getContent();
-	var ids = $('#ids').val();
 	
+	var ids = $('#ids').val();
+	var content = $('#contents').val();
 	var data = {
 			"ids":ids,
 			"content":content	
@@ -52,85 +43,129 @@ function getContent() {
 </script>
 </head>
 <body>
-	<div class="container">
-		<div class="row">
-			<div class="span12"><%- include header.html %></div>
-		</div>
-		<div>
-		
-					<!-- JiaThis Button BEGIN -->
-			<div class="jiathis_style">
-				<a class="jiathis_button_qzone"></a> <a
-					class="jiathis_button_tsina"></a> <a class="jiathis_button_tqq"></a>
-				<a class="jiathis_button_weixin"></a> <a
-					class="jiathis_button_renren"></a> <a
-					href="http://www.jiathis.com/share?uid=2038298"
-					class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis"
-					target="_blank"></a> <a class="jiathis_counter_style"></a>
-			</div>
-			<script type="text/javascript">
-var jiathis_config={
-	data_track_clickback:true,
-	hideMore:false
-}
-</script>
-			<script type="text/javascript"
-				src="http://v3.jiathis.com/code/jia.js?uid=2038298" charset="utf-8"></script>
-			<!-- JiaThis Button END -->
-		</div>
-		<div class="row">
+	<%- include header.html%>
+	<div class="main clear">
+		<!-- 中间结构左侧内容 -->
 
-			<div class="span4">
-				<%if(travelnote){ %>
+		<div class="diary_content">
+			<%if(travelnote){ %>
+			<h1><%- travelnote.title%></h1>
+			<input type="hidden" value="<%-travelnote._id%>" id="ids">
+			<p class="author">
+				作者：<a href=""><%- travelnote.creator_name%></a>&nbsp;&nbsp;&nbsp;&nbsp;收藏0/评论<%-travelnote.comments.length
+				%>&nbsp;&nbsp;发布时间:<%-travelnote.creater_time %>&nbsp;&nbsp;
+			</p>
+			<!-- 日记内容 -->
+			<div class="diaryDetail">
+				<div class="diaryTips">
 
-				<div>
-				<input type="hidden" value="<%-travelnote._id%>" id="ids">
-				标题:<%- travelnote.title%>
-					<span>目的地:<%- travelnote.arrive_place%></span><br> <span>出发城市:<%-
-						travelnote.start_province%>-<%- travelnote.start_city%></span><br> <span>出行时间:<%-
-						travelnote.start_time%>~~~<%- travelnote.end_time%></span><br> <span><%-
-						travelnote.content%></span><br> <span>友情提示:<%-
-						travelnote.tips%></span><br>
-
+					<div class="jiathis_style">
+						<a class="jiathis_button_qzone"></a> <a
+							class="jiathis_button_tsina"></a> <a class="jiathis_button_tqq"></a>
+						<a class="jiathis_button_weixin"></a> <a
+							class="jiathis_button_renren"></a> <a
+							href="http://www.jiathis.com/share?uid=2038298"
+							class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis"
+							target="_blank"></a> <a class="jiathis_counter_style"></a>
+					</div>
+					<script type="text/javascript">
+						var jiathis_config={
+							data_track_clickback:true,
+							hideMore:false
+						}
+					</script>
+					<script type="text/javascript"
+						src="http://v3.jiathis.com/code/jia.js?uid=2038298"
+						charset="utf-8"></script>
+					<!-- JiaThis Button E-->
+					<ul>
+						<li>出 发 地：<%-travelnote.start_province%>-<%-
+							travelnote.start_city%></li>
+						<li>目 的 地：<%- travelnote.arrive_place%></li>
+						<li>旅行时间：<%-travelnote.start_time%> - <%-
+							travelnote.end_time%></li>
+						<li>行程时间：7<%- travelnote.arrive_place%>天</li>
+						<li>人均花销：<%- travelnote.per_spending%></li>
+						<li>出行方式：<%- travelnote.travel_mode%></li>
+					</ul>
 				</div>
-				<%}%>
-			</div>
-			
-			
-			<div>
-		
-			<hr>
-				发表评论:
-			<hr>
-			<form class="form-horizontal">
-			<div class="form-group">
-						
-						<div class="col-sm-10">
-						<script id="editor" type="text/plain"
-								style="width: 600px; height: 150px;"></script>
-						</div>
-					</div>
-			
-				<div class="form-group">
+				<%- travelnote.content%>
 
-						<div class="col-sm-10" style="text-align: center">
-							<input type="submit" value="确认提交" class="btn btn-info"
-								onclick="getContent()" />
-						</div>
-					</div>
-					</form>
-			
-			
+				<hr>
+				<p>友情提示：<%- travelnote.tips%></p>
 			</div>
-			
+			<%}%>
+			<!-- 评论区 -->
+			<div class="comment clear">
+				<h2>发表评论</h2>
+				<div class="user">
+					<%if(user){%> <img class="user_img" src="../images/usericon/1.gif" />
+					<a><%=user.nickname%></a> <%}else{%> <img class="user_img"
+						src="../images/usericon/1.gif" /> <a href="#">请去登录</a> <%}%>
+				</div>
+				<div class="textArea">
+					<form>
+						<textarea class="text" cols="88" rows="8" name="" id="contents"></textarea>
+						<input class="btn" type="submit" value="发表评论" name=""  onclick="getContent()"/>
+					</form>
+				</div>
+
+			</div>
+			<div class="otherWords">
+				<h2>驴友的评论</h2>
+				<div class="owList">
+					<ul>
+					<%for(var i in comments){ if(!comments[i].comment_content)continue;%>
+						<li><%- (parseInt(i)+1)%>楼<%-comments[i].comment_content -%></li>
+					<%}%>
+					</ul>
+				</div>
+			</div>
 		</div>
-		<div class="row">
-			<div class="span12">
-				<address>
-					<strong>@copyright for allen</strong>
-				</address>
+		<div class="recommend">
+			<div class="in">
+				<a class="like" href="#">0人喜欢</a> <a class="coll" href="#">0人收藏</a>
+			</div>
+			<div class="wonderful_notes">
+				<h4>精彩游记</h4>
+				<ul>
+					<li><a href="#">啦啦啦德玛西亚</a></li>
+					<li><a href="#">啦啦啦德玛西亚</a></li>
+					<li><a href="#">啦啦啦德玛西亚</a></li>
+					<li><a href="#">啦啦啦德玛西亚</a></li>
+					<li><a href="#">啦啦啦德玛西亚</a></li>
+					<li><a href="#">啦啦啦德玛西亚</a></li>
+					<li><a href="#">啦啦啦德玛西亚</a></li>
+					<li><a href="#">啦啦啦德玛西亚</a></li>
+				</ul>
 			</div>
 		</div>
 	</div>
+
+	<%- include footer.html%>
+	<!--[if IE 6]>
+<script type="text/jscript" src="js/DD_belatedPNG_0.0.8a.js"></script>
+<script>
+DD_belatedPNG.fix('*');
+</script>
+<![endif]-->
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

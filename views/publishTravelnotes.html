@@ -70,7 +70,7 @@ $(function(){
 						<label class="col-sm-2 control-label">标题:</label>
 						<div class="col-sm-10">
 							<input type="text" class="form-control" id="title"
-								placeholder="Title" style="width: 250px">
+								placeholder="Title" style="width: 250px" required>
 						</div>
 					</div>
 					<div class="form-group">
@@ -147,7 +147,7 @@ $(function(){
 						<label for="inputPassword" class="col-sm-2 control-label">内容:</label>
 						<div class="col-sm-10">
 							<script id="editor" type="text/plain"
-								style="width: 600px; height: 300px;"></script>
+								style="width: 600px; height: 300px;" required></script>
 						</div>
 					</div>
 
@@ -164,7 +164,7 @@ $(function(){
 					<div class="form-group">
 
 						<div class="col-sm-10" style="text-align: center">
-							<input type="submit" value="确认提交" class="btn btn-info"
+							<input type="button" value="确认提交" class="btn btn-info"
 								onclick="getContent()" />
 						</div>
 					</div>
@@ -202,7 +202,10 @@ $(function(){
 							tips = 		$('#tips').val();
 						var preSpending = $('#preSpending').val();
 						var travelMode = $('#travelMode').val();
-						
+						if(title == null || title == ''){
+							alert(12321);
+							return false;
+						}
 						var data = {
 								"title":title,
 								"province":province,

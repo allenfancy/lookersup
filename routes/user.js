@@ -6,7 +6,7 @@ var gm = require('gm');
 var imageMagick = gm.subClass({ imageMagick : true });
 
 /***
- * 首先 在ubuntu 上面安装 sudo apt-get install imagemagick
+ * 首先 在ubuntu 上面安装  sudo apt-get install imagemagick
  * 
  */
 module.exports = function(app) {
@@ -58,7 +58,7 @@ module.exports = function(app) {
 	    		var target_path='./public/images/title/'+image_name+req.files.codecsv.name;
 	    		var show_path = '/images/title/'+image_name+req.files.codecsv.name;
 	    		imageMagick(path)
-	    		.resize(150, 150, '!') //加('!')强行把图片缩放成对应尺寸150*150！
+	    		.resize(160, 120, '!') //加('!')强行把图片缩放成对应尺寸150*150！
 	    		.autoOrient()
 	    		.write(target_path, function(err){
 	    			if (err) {
@@ -113,7 +113,7 @@ module.exports = function(app) {
 		console.log('come into showDetails');
 		console.log('id.......:'+req.params.id)
 		Travelnotes.findOne({'_id':req.params.id},function(err,doc){
-			console.log('這是content:'+doc.content);
+			console.log('這是content:'+doc.comments);
 			if(doc){
 				Travelnotes.update({'_id':req.params.id},{
 					 $inc: {"browser_number": 1}
@@ -125,7 +125,8 @@ module.exports = function(app) {
 			}
 			res.render('showDetail',{
 				title:doc.title+'詳情',
-				travelnote:doc
+				travelnote:doc,
+				comments:doc.comments
 			});
 		});
 	});
