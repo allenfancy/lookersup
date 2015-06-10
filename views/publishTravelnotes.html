@@ -7,14 +7,10 @@
 <title><%=title%></title>
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 
-<link rel="stylesheet" type="text/css"
-	href="/stylesheets/bootstrap.min.css" />
-<link rel="stylesheet" type="text/css"
-	href="/stylesheets/bootstrap-responsive.min.css" />
+<link href="/stylesheets/public.css" rel="stylesheet" />
+<link href="/stylesheets/publishDiary.css" rel="stylesheet" />
 
 
-<script type="text/javascript" src="/javascripts/swfobject.js"></script>
-<script type="text/javascript" src="/javascripts/bootstrap.min.js"></script>
 <script src="/javascripts/jquery-2.1.1.min.js" type="text/javascript"></script>
 <!-- 富文本编辑 -->
 <script type="text/javascript" charset="utf-8"
@@ -28,15 +24,12 @@
 
 <script type="text/javascript">
 $(function(){  
-    $('#file_upload').click(function(){  
-         
+    $('#file_upload').click(function(){    
         var data = new FormData();  
-        var files = $('#file')[0].files;  
-          
+        var files = $('#file')[0].files;       
         if (files) {  
             data.append('codecsv',files[0]);  
-        }             
-          
+        }                 
         $.ajax({  
             cache: false,  
             type: 'post',  
@@ -54,187 +47,140 @@ $(function(){
         });  
     });  
       
-})  
+});
 
 </script>
 </head>
 <body>
-	<div class="container">
-		<div class="row">
-			<div class="span12"><%- include header.html %></div>
-		</div>
-		<div class="row">
-			<div class="span9">
-				<form class="form-horizontal">
-					<div class="form-group">
-						<label class="col-sm-2 control-label">标题:</label>
-						<div class="col-sm-10">
-							<input type="text" class="form-control" id="title"
-								placeholder="Title" style="width: 250px" required>
-						</div>
-					</div>
-					<div class="form-group">
-						<label for="inputPassword" class="col-sm-2 control-label">出发地:</label>
-						<div class="col-sm-10">
-							<input type="text" class="form-control" id="inputProvince"
-								placeholder="Province" style="width: 250px"> <input
-								type="text" class="form-control" id="inputCity"
-								placeholder="City" style="width: 250px">
-						</div>
-					</div>
+<%- include header.html %>
 
-					<div class="form-group">
-						<label for="inputPassword" class="col-sm-2 control-label">目的地:</label>
-						<div class="col-sm-10">
-							<input type="text" class="form-control" id="inputArrive"
-								placeholder="ArricePlace" style="width: 250px">
-						</div>
-					</div>
-
-					<div class="form-group">
-						<label for="inputPassword" class="col-sm-2 control-label">封面图片:</label>
-						<div class="col-sm-10">
-
-							<input type="file" class="form-control" placeholder="Password"
-								style="width: 250px" name="coverPric" id="file">
-							 <input id='file_upload' type="button" value="上传封面"  class="btn">
-							 <input type="text" value="<%=imageUrl%>" id="imageUrl" > 
-						</div>
-					</div>
-
-					<div class="form-group">
-						<label for="inputPassword" class="col-sm-2 control-label">出发时间:</label>
-						<div class="col-sm-10">
-							<input type="text" class="form-control" id="inputStartTime"
-								placeholder="出发时间" style="width: 250px">
-						</div>
-					</div>
-					<div class="form-group">
-						<label for="inputPassword" class="col-sm-2 control-label">结束时间:</label>
-						<div class="col-sm-10">
-							<input type="text" class="form-control" id="inputEndTime"
-								placeholder="结束时间" style="width: 250px">
-						</div>
-					</div>
-
-					<div class="form-group">
-						<label for="inputPassword" class="col-sm-2 control-label">人均花销</label>
-						<div class="col-sm-10">
-							<select class="form-control" style="width: 250px"
-								id="preSpending">
-								<option>--请选择--</option>
-								<option>250以下</option>
-								<option>500以下</option>
-								<option>1000以下</option>
-								<option>10000以上</option>
-							</select>
-						</div>
-					</div>
-
-					<div class="form-group">
-						<label for="inputPassword" class="col-sm-2 control-label">出行方式:</label>
-						<div class="col-sm-10">
-							<select class="form-control" style="width: 250px" id="travelMode">
-								<option>--请选择--</option>
-								<option>自驾</option>
-								<option>报团</option>
-								<option>徒步</option>
-							</select><br>
-						</div>
-					</div>
-
-					<div class="form-group">
-						<label for="inputPassword" class="col-sm-2 control-label">内容:</label>
-						<div class="col-sm-10">
-							<script id="editor" type="text/plain"
-								style="width: 600px; height: 300px;" required></script>
-						</div>
-					</div>
-
-					<div class="form-group">
-						<label for="inputPassword" class="col-sm-2 control-label">友情提示:</label>
-						<div class="col-sm-10">
-							<textarea rows="10" cols="200" id="tips" class="form-control"
-								style="width: 600px; margin-left: 0px; margin-right: 275px;">
+<div class="main">
+	<div id="form_body">
+		<form id="publish" action="#" method="">
+			<div class="textRight">
+            	<label for="title">标题:</label>
+            	<input class="text" type="text" placeholder="标题" name="title" id="title" />
+            	<span></span>
+         	</div>
+         	<div class="textRight">
+            	<label for="start">出发地:</label>
+            	<input class="text" type="text" placeholder="province" name="start" id="province"/><span></span>
+            	<input class="text" type="text" placeholder="city" name="city" id="city"/><span></span>
+            </div>
+            <div class="textRight">
+           		<label for="end">目的地:</label>
+            	<input class="text" type="text" placeholder="destination" name="end" id="destination"/><span></span>
+         	</div>
+         	<div class="textRight">
+         		<label>封面图片:</label>
+                <input type="text" class="text" readonly="readonly" placeholder="图片URL" id="imageUrl"/>
+                <input type="file" class="uploadFile" size="30" id="file"/>
+                <input type="button"  class="upload" value="上传" id="file_upload"/>
+         	</div>
+         	<div class="textRight">
+            	<label for="startTime">出发时间:</label>
+            	<input class="text" type="text" placeholder="starttime" name="startTime" id="startTime" />
+            	<span></span>
+         	</div>
+         	<div class="textRight">
+         		<label for="endTime">结束时间:</label>
+            	<input class="text" type="text" placeholder="endtime" name="startTime"  id="endTime"/>
+            	<span></span>
+        	</div>
+        	<div class="textRight">
+         		<label for="spendTime">旅行天数:</label>
+            	<input class="text" type="text" placeholder="spendTime" name="spendTime"  id="spendDays"/>天
+            	<span></span>
+        	</div>
+         	<div class="textRight">
+         		<label>人均花销:</label>
+            	<select id="preSpending">
+            		<option>--请选择--</option>
+                	<option>500元以下</option>
+                	<option>500-1000元</option>
+                	<option>1000-3000元</option>
+            	</select>
+            	<span></span>
+        	</div>
+        	<div class="textRight">
+         		<label>出行方式:</label>
+            	<select id="travelMode">
+                	<option>--请选择--</option>
+                	<option>自由行</option>
+                	<option>跟团</option>
+                	<option>自驾</option>
+            	</select>
+            	<span></span>
+        	</div>
+        	<div class="wrap">
+        		<label for="content">内容:</label>
+                <div class="content">
+                <script id="editor" type="text/plain"
+								style="width: 610px; height: 300px;" ></script>
+                </div>
+        	</div>
+        	<div class="wrap">
+        		<label for="hint">友情提示:</label>
+                <div class="content">
+                <textarea  rows="10" name="hint" cols="100" id="tips" class="form-control">
                 </textarea>
-						</div>
-					</div>
+                </div>
+       		</div>
+            <div class="sub_btn">
+        		<input class="sbtn" type="submit" value="提交" onclick="getContent()" />
+            </div>   
+    	</form>
+    </div>
+</div>
 
+<%- include footer.html%>
 
-					<div class="form-group">
-
-						<div class="col-sm-10" style="text-align: center">
-							<input type="button" value="确认提交" class="btn btn-info"
-								onclick="getContent()" />
-						</div>
-					</div>
-				</form>
-
-
-			</div>
-		</div>
-	</div>
-
-	<div class="row">
-		<div class="span12">
-			<address>
-				<strong>@copyright for allen</strong>
-			</address>
-		</div>
-	</div>
-
-	<script type="text/javascript">
-	
-	
-	
-			
-					var ue = UE.getEditor('editor');
-					function getContent() {
+<script type="text/javascript">
+	var ue = UE.getEditor('editor');
+	function getContent() {
+		var content = UE.getEditor('editor').getContent();
 						
-						var content = UE.getEditor('editor').getContent();
-						var title = $('#title').val(),
-							province = $('#inputProvince').val(),
-						    city = $('#inputCity').val(),
-						    arrive = $('#inputArrive').val(),
-							converPric = $('#imageUrl').val(),
-							startTime = $('#inputStartTime').val(),
-							endTime  = $('#inputEndTime').val(),
-							tips = 		$('#tips').val();
-						var preSpending = $('#preSpending').val();
-						var travelMode = $('#travelMode').val();
-						if(title == null || title == ''){
-							alert(12321);
-							return false;
-						}
-						var data = {
-								"title":title,
-								"province":province,
-								"city":city,
-								"arrive":arrive,
-								"converPric":converPric,
-								"startTime":startTime,
-								"endTime":endTime,
-								"preSpending":preSpending,
-								"travelMode":travelMode,
-								"content":content,
-								"tips":tips
-						};
-						
-			    		$.ajax({
-			    			url:'/user/saveTravelNotes',
-			    			type:'POST',
-			    			data:data,
-			    			success:function(data,status){
-			    				if(status=='success'){
-			    					alert('游记发布成功!');
-			    					location.href='/user/userHome';
-			    				}
-			    			},
-			    			error:function(data,err){
-			    				location.href = '/404';
-			    			}
-			    		});
-					}
-				</script>
+		var title = $('#title').val(),
+			province = $('#province').val(),
+			city = $('#city').val(),
+			arrive = $('#destination').val(),
+			converPric = $('#imageUrl').val(),
+			startTime = $('#startTime').val(),
+			endTime  =  $('#endTime').val(),
+			spendDays =  $('#spendDays').val(),
+			tips = 		$('#tips').val(),
+			preSpending = $('#preSpending').val(),
+		    travelMode = $('#travelMode').val();
+		var data = {
+				"title":title,
+				"province":province,
+				"city":city,
+				"arrive":arrive,
+				"converPric":converPric,
+				"startTime":startTime,
+				"endTime":endTime,
+				"preSpending":preSpending,
+				"travelMode":travelMode,
+				"content":content,
+				"tips":tips,
+				"spendDays":spendDays
+		};
+		$.ajax({
+			url:'/user/saveTravelNotes',
+			type:'POST',
+			data:data,
+			success:function(data,status){
+				if(status=='success'){
+					alert('游记发布成功!');
+					location.href='/user/userHome';
+				}
+			},
+			error:function(data,err){
+				location.href = '/404';
+			}
+		});
+	}
+			    	
+</script>
 </body>
 </html>

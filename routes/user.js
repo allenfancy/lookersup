@@ -136,8 +136,8 @@ module.exports = function(app) {
 	app.post('/user/saveTravelNotes', function(req, res) {
 		console.log('进来了 ，来发布日记了');   
 		if (req.session.user) {
-			console.log(req.session.user._id);
-			
+			var nowDate = moment().format("YYYY-MM-DD HH:mm");
+			console.log(nowDate);
 			var travelnotes = new Travelnotes({
 				title : req.body.title,
 				start_province : req.body.province,
@@ -152,11 +152,10 @@ module.exports = function(app) {
 				tips : req.body.tips,
 				creator_id:req.session.user._id,
 				creator_name:req.session.user.nickname,
-				browser_number:0,
-				comment_number:0,
-				share_number:0,
-				praise_number:0,
-				collection_number:0
+				spendDays:req.body.spendDays,
+				create_time:nowDate,
+				update_time:nowDate
+				
 			});
 
 			console.log(travelnotes);
@@ -168,9 +167,8 @@ module.exports = function(app) {
 					console.log('添加成功');
 					console.log(req.session.user);
 					req.session.error = "游记发布成功!";
-					res.send(200)
+					res.sendStatus(200)
 				}
-
 			});
 		} else {
 			req.session.error = "用戶登陸信息已經過期，請重新登陸";

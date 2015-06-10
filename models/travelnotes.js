@@ -18,21 +18,15 @@ var TravelnotesSchema = new Schema({
 	content:String,//内容
 	tips:String,//友情提示
 	status:String,//状态
+	spendDays:String,//天数
 	create_time:{
-		type:String,
-		default:moment().format("YYYY-MM-DD HH:mm")
-	},
-	create_time:{
-		type:String,
-		default:moment().format("YYYY-MM-DD HH:mm")
+		type:String,	
 	},
 	update_time:{
-		type:String,
-		default:moment().format("YYYY-MM-DD HH:mm")
+		type:String,	
 	},
 	publish_time:{
-		type:String,
-		default:moment().format("YYYY-MM-DD HH:mm")
+		type:String,	
 	},
 	creator_id:String,
 	creator_name:String,
