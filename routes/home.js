@@ -4,7 +4,7 @@ module.exports = function(app) {
 	
 	app.get('/home', function(req, res){
 		Travelnotes.find({}, null, {
-			//limit : 10,
+			limit : 10,
 			sort : {
 				update_time : -1
 			}

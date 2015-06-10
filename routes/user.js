@@ -26,7 +26,14 @@ module.exports = function(app) {
         var uuid = s.join("");
         return uuid;
     }
-	 
+	
+	function timeFormat(date){
+		return date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate() + " " + 
+	      date.getHours() + ":" + (date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes());
+	}
+	
+	
+	
 	//上传图片的GET
 	app.get('/user/upload',function(req,res){
 		console.log('I am come into the '+(i++));
@@ -124,6 +131,15 @@ module.exports = function(app) {
 					}
 				});
 			}
+			 var date = doc.create_time;
+			 var time1 = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate() + " " + 
+		      date.getHours() + ":" + (date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes());
+			 console.log('time1 : '+time1);
+			 doc.create_time =  time1;
+			 time1 = doc.create_time;
+			 console.log('time111 : '+time1);
+			console.log(doc.create_time);
+			console.log(doc);
 			res.render('showDetail',{
 				title:doc.title+'詳情',
 				travelnote:doc,
@@ -136,8 +152,7 @@ module.exports = function(app) {
 	app.post('/user/saveTravelNotes', function(req, res) {
 		console.log('进来了 ，来发布日记了');   
 		if (req.session.user) {
-			var nowDate = moment().format("YYYY-MM-DD HH:mm");
-			console.log(nowDate);
+			var nowDate = new Date();
 			var travelnotes = new Travelnotes({
 				title : req.body.title,
 				start_province : req.body.province,
@@ -162,12 +177,11 @@ module.exports = function(app) {
 			Travelnotes.create(travelnotes, function(err, doc) {
 				if (err) {
 					console.log(err);
-					return res.send(500);
+					return res.send(404);
 				} else {
 					console.log('添加成功');
 					console.log(req.session.user);
-					req.session.error = "游记发布成功!";
-					res.sendStatus(200)
+					res.sendStatus(200);
 				}
 			});
 		} else {

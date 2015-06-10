@@ -20,13 +20,16 @@ var TravelnotesSchema = new Schema({
 	status:String,//状态
 	spendDays:String,//天数
 	create_time:{
-		type:String,	
+		type:Date,
+		default:new Date()
 	},
 	update_time:{
-		type:String,	
+		type:Date,	
+		default:new Date()
 	},
 	publish_time:{
-		type:String,	
+		type:Date,	
+		default:new Date()
 	},
 	creator_id:String,
 	creator_name:String,

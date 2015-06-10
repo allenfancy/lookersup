@@ -147,12 +147,12 @@ require('./routes')(app);
 
 app.get('/',function(req,res){
 	Travelnotes.find({}, null, {
-			//limit : 10,
+			limit : 10,
 			sort : {
 				update_time : -1
 			}
 		}, function(err, docs) {
-			// console.log(docs.length());
+			//console.log(docs.length());
 			res.render('home', {
 				title : '主页',
 				user : req.session.user,
