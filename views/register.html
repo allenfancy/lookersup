@@ -41,7 +41,8 @@
     			data:data,
     			success:function(data,status){
     				if(status == 'success'){
-    					location.href='/login';
+    					alert('用户创建成功！');
+    					location.href='/home';
     				} 
     			},
     			error:function(data,err){

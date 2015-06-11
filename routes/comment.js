@@ -37,7 +37,7 @@ module.exports = function(app) {
 
 		} else {
 			res.status(500).send({
-				'msg' : '请先登录'
+				'data' : '请先登录'
 			});
 		}
 	});

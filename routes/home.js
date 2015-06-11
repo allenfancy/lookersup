@@ -22,7 +22,6 @@ module.exports = function(app) {
 	
 	//用户发布游记
 	app.get('/user/publishTravelnotes',function(req,res){
-		console.log('log ....  get')
 		if(req.session.user){
 			console.log('session ');
 			res.render('publishTravelnotes',{

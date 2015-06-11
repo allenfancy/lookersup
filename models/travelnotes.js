@@ -21,15 +21,15 @@ var TravelnotesSchema = new Schema({
 	spendDays:String,//天数
 	create_time:{
 		type:Date,
-		default:new Date()
+		default:Date.now
 	},
 	update_time:{
 		type:Date,	
-		default:new Date()
+		default:Date.now
 	},
 	publish_time:{
 		type:Date,	
-		default:new Date()
+		default:Date.now
 	},
 	creator_id:String,
 	creator_name:String,

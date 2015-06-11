@@ -58,7 +58,7 @@ $(function(){
 
 <div class="main">
 	<div id="form_body">
-		<form id="publish" action="#" method="">
+		<form id="publish">
 			<div class="textRight">
             	<label for="title">标题:</label>
             	<input class="text" type="text" placeholder="标题" name="title" id="title" />
@@ -81,12 +81,12 @@ $(function(){
          	</div>
          	<div class="textRight">
             	<label for="startTime">出发时间:</label>
-            	<input class="text" type="text" placeholder="starttime" name="startTime" id="startTime" onFocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',lang:'zh-cn',maxDate:'#F{$dp.$D(\'endTime\')}'})"/>
+            	<input class="text" type="text" placeholder="starttime" name="startTime" id="startTime" onFocus="WdatePicker({dateFmt:'yyyy-MM-dd',lang:'zh-cn',maxDate:'#F{$dp.$D(\'endTime\')}'})"/>
             	<span></span>
          	</div>
          	<div class="textRight">
          		<label for="endTime">结束时间:</label>
-            	<input class="text" type="text" placeholder="endtime" name="startTime"  id="endTime" onFocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',lang:'zh-cn',minDate:'#F{$dp.$D(\'startTime\')}'})""/>
+            	<input class="text" type="text" placeholder="endtime" name="startTime"  id="endTime" onFocus="WdatePicker({dateFmt:'yyyy-MM-dd',lang:'zh-cn',minDate:'#F{$dp.$D(\'startTime\')}'})""/>
             	<span></span>
         	</div>
         	<div class="textRight">
@@ -129,12 +129,14 @@ $(function(){
                 </div>
        		</div>
             <div class="sub_btn">
-        		<input class="sbtn" type="submit" value="提交" onclick="getContent()" />
+        		<input class="sbtn" type="button" value="提交" onclick="getContent()" />
             </div>   
     	</form>
     </div>
 </div>
+
 <script type="text/javascript">
+
 var ue = UE.getEditor('editor');
 function getContent() {
 	var content = UE.getEditor('editor').getContent();
@@ -171,7 +173,7 @@ function getContent() {
 		success:function(data,status){
 			if(status=='success'){
 				alert('游记发布成功!');
-				window.location.href='/home';
+        window.location.href = '/user/userHome';
 			}
 		},
 		error:function(data,err){

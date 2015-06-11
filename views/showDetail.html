@@ -21,6 +21,18 @@ function getContent() {
 	
 	var ids = $('#ids').val();
 	var content = $('#contents').val();
+	var creator_id = $('#creator_id').val();
+	var current_user_id = $('#current_id').text();
+
+	if(creator_id == current_user_id){
+		alert('自己发布的文章，不能评论!');
+		return;
+	}
+
+	if(content == null || content==''){
+		alert('请输入评论的内容');
+		return;
+	}
 	var data = {
 			"ids":ids,
 			"content":content	
@@ -35,8 +47,9 @@ function getContent() {
 				location.reload();
 			}
 		},
-		error:function(data,err){
-			location.href = '/404';
+		error:function(data){
+			var json = data.responseJSON;
+			alert(json.data);
 		}
 	});
 }
@@ -51,6 +64,7 @@ function getContent() {
 			<%if(travelnote){ %>
 			<h1><%- travelnote.title%></h1>
 			<input type="hidden" value="<%-travelnote._id%>" id="ids">
+			<input type="hidden" value="<%-travelnote.creator_id%>" id="creator_id">
 			<p class="author">
 				作者：<a href=""><%- travelnote.creator_name%></a>&nbsp;&nbsp;&nbsp;&nbsp;收藏0/评论<%-travelnote.comments.length
 				%>&nbsp;&nbsp;发布时间:<%-travelnote.create_time %>&nbsp;&nbsp;
@@ -102,13 +116,15 @@ function getContent() {
 				<h2>发表评论</h2>
 				<div class="user">
 					<%if(user){%> <img class="user_img" src="../images/usericon/1.gif" />
-					<a><%=user.nickname%></a> <%}else{%> <img class="user_img"
+					<a><%=user.nickname%></a>
+					<p style="display:none" id="current_id"><%-user._id%></p>
+					 <%}else{%> <img class="user_img"
 						src="../images/usericon/1.gif" /> <a href="#">请去登录</a> <%}%>
 				</div>
 				<div class="textArea">
 					<form>
 						<textarea class="text" cols="74" rows="8" name="" id="contents"></textarea>
-						<input class="btn" type="submit" value="发表评论" name=""  onclick="getContent()"/>
+						<input class="btn" type="button" value="发表评论" name=""  onclick="getContent()"/>
 					</form>
 				</div>
 
@@ -118,7 +134,7 @@ function getContent() {
 				<div class="owList">
 					<ul>
 					<%for(var i in comments){ if(!comments[i].comment_content)continue;%>
-						<li><%- (parseInt(i)+1)%>楼<%-comments[i].comment_content -%></li>
+						<li><%- (parseInt(i)+1)%>楼:评论人：<%-comments[i].comment_user_nickname%> <br>评论内容:<%-comments[i].comment_content -%></li>
 					<%}%>
 					</ul>
 				</div>

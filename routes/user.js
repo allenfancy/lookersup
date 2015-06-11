@@ -103,7 +103,7 @@ module.exports = function(app) {
 					update_time : -1
 				}
 			}, function(err, docs) {
-				// console.log(docs.length());
+			
 				res.render('userhome', {
 					title : '用户中心',
 					user : req.session.user,
@@ -152,7 +152,7 @@ module.exports = function(app) {
 	app.post('/user/saveTravelNotes', function(req, res) {
 		console.log('进来了 ，来发布日记了');   
 		if (req.session.user) {
-			var nowDate = new Date();
+			
 			var travelnotes = new Travelnotes({
 				title : req.body.title,
 				start_province : req.body.province,
@@ -167,9 +167,7 @@ module.exports = function(app) {
 				tips : req.body.tips,
 				creator_id:req.session.user._id,
 				creator_name:req.session.user.nickname,
-				spendDays:req.body.spendDays,
-				create_time:nowDate,
-				update_time:nowDate
+				spendDays:req.body.spendDays
 				
 			});
 
@@ -177,11 +175,12 @@ module.exports = function(app) {
 			Travelnotes.create(travelnotes, function(err, doc) {
 				if (err) {
 					console.log(err);
-					return res.send(404);
+					return res.redirect('/404');
 				} else {
 					console.log('添加成功');
 					console.log(req.session.user);
 					res.sendStatus(200);
+					//res.redirect('/user/userHome');
 				}
 			});
 		} else {
@@ -189,9 +188,4 @@ module.exports = function(app) {
 			res.redirect('/login');
 		}
 	});
-
-	
-	app.post('/upload_conver',function(req,res){
-		console.log('进来了，我是来上床封面的');
-	})
 }
