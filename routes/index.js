@@ -5,4 +5,5 @@ module.exports = function ( app ) {
     require('./home')(app);
     require('./user')(app);
     require('./comment')(app);
+    require('./travelnotes')(app);
 };

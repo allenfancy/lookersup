@@ -2,7 +2,7 @@ var Travelnotes = require('../models/travelnotes');
 module.exports = function(app) {
 	console.log('come into home page');
 	
-	app.get('/home', function(req, res){
+	app.get('/', function(req, res){
 		Travelnotes.find({}, null, {
 			limit : 10,
 			sort : {

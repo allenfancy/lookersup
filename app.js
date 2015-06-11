@@ -145,23 +145,46 @@ app.use(function(err, req, res, next) {
 
 require('./routes')(app);
 
-app.get('/',function(req,res){
-	Travelnotes.find({}, null, {
+app.get('/', function(req, res) {
+	if (!req.session.user) {
+		var sid = req.cookies.sid;
+		if (!sid) {
+			res.setHeader("Set-Cookie", [ "sid="
+					+ Math.floor(Math.random() * 10000) ]);
+		}else{
+			Travelnotes.find({}, null, {
+				limit : 10,
+				sort : {
+					update_time : -1
+				}
+			}, function(err, docs) {
+				// console.log(docs.length());
+				res.render('home', {
+					title : '主页',
+					user : req.session.user,
+					travelnotes : docs
+				});
+			});
+		}
+	} else {
+		Travelnotes.find({}, null, {
 			limit : 10,
 			sort : {
 				update_time : -1
 			}
 		}, function(err, docs) {
-			//console.log(docs.length());
+			// console.log(docs.length());
 			res.render('home', {
 				title : '主页',
 				user : req.session.user,
 				travelnotes : docs
 			});
 		});
+	}
 });
 
 // 端口
-http.createServer(app).listen(app.get('port'), function() {
+http.createServer(app).listen(app.get('port'), function(req,res) {
+	
 	console.log('lookersup server listening on port : ' + app.get('port'));
 });

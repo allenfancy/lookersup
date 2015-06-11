@@ -6,53 +6,41 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title><%=title%></title>
 <link rel="stylesheet" type="text/css" href="/stylesheets/public.css" />
-<link rel="stylesheet" type="text/css"
-	href="/stylesheets/diaryDetails.css" />
+<link rel="stylesheet" type="text/css" href="/stylesheets/diaryDetails.css" />
 
 
 <script type="text/javascript" src="/javascripts/jquery.min.js"></script>
-
-
+<script type="text/javascript" src="/javascripts/showDetail.js"></script>
+<script type="text/javascript" src="/javascripts/jquery.cookie.js"></script>
 <script type="text/javascript">
-
-
-function getContent() {
+function likeNote(){
 	
-	
+	var sid = $.cookie('sid');
+	var newsid = $.cookie('newsid');
+	if(sid == newsid){
+		alert('你已经喜欢过了');
+		return;
+	}
 	var ids = $('#ids').val();
-	var content = $('#contents').val();
-	var creator_id = $('#creator_id').val();
-	var current_user_id = $('#current_id').text();
-
-	if(creator_id == current_user_id){
-		alert('自己发布的文章，不能评论!');
-		return;
-	}
-
-	if(content == null || content==''){
-		alert('请输入评论的内容');
-		return;
-	}
 	var data = {
 			"ids":ids,
-			"content":content	
-	};
-	
+			"sid":sid
+	}
 	$.ajax({
-		url:'/saveComment',
+		url:'/likeNotes',
 		type:'POST',
 		data:data,
 		success:function(data,status){
 			if(status=='success'){
-				location.reload();
+				$('#likes').text(data.praise_number+'人喜欢');
 			}
 		},
-		error:function(data){
-			var json = data.responseJSON;
-			alert(json.data);
+		error:function(data,error){
+			window.location.href='/404'
 		}
 	});
 }
+
 </script>
 </head>
 <body>
@@ -142,7 +130,7 @@ function getContent() {
 		</div>
 		<div class="recommend">
 			<div class="in">
-				<a class="like" href="#">0人喜欢</a> <a class="coll" href="#">0人收藏</a>
+				<a class="like" id="likes" href="javascript:void(0)" onclick="likeNote()"><%-travelnote.praise_number%>人喜欢</a> <a class="coll" href="#">0人收藏</a>
 			</div>
 			<div class="wonderful_notes">
 				<h4>精彩游记</h4>
