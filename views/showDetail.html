@@ -12,36 +12,6 @@
 <script type="text/javascript" src="/javascripts/jquery.min.js"></script>
 <script type="text/javascript" src="/javascripts/showDetail.js"></script>
 <script type="text/javascript" src="/javascripts/jquery.cookie.js"></script>
-<script type="text/javascript">
-function likeNote(){
-	
-	var sid = $.cookie('sid');
-	var newsid = $.cookie('newsid');
-	if(sid == newsid){
-		alert('你已经喜欢过了');
-		return;
-	}
-	var ids = $('#ids').val();
-	var data = {
-			"ids":ids,
-			"sid":sid
-	}
-	$.ajax({
-		url:'/likeNotes',
-		type:'POST',
-		data:data,
-		success:function(data,status){
-			if(status=='success'){
-				$('#likes').text(data.praise_number+'人喜欢');
-			}
-		},
-		error:function(data,error){
-			window.location.href='/404'
-		}
-	});
-}
-
-</script>
 </head>
 <body>
 	<%- include header.html%>
@@ -54,7 +24,7 @@ function likeNote(){
 			<input type="hidden" value="<%-travelnote._id%>" id="ids">
 			<input type="hidden" value="<%-travelnote.creator_id%>" id="creator_id">
 			<p class="author">
-				作者：<a href=""><%- travelnote.creator_name%></a>&nbsp;&nbsp;&nbsp;&nbsp;收藏0/评论<%-travelnote.comments.length
+				作者：<a href=""><%- travelnote.creator_name%></a>&nbsp;&nbsp;&nbsp;&nbsp;收藏<%-travelnote.collection_number%>/评论<%-travelnote.comments.length
 				%>&nbsp;&nbsp;发布时间:<%-travelnote.create_time %>&nbsp;&nbsp;
 			</p>
 			<!-- 日记内容 -->
@@ -112,7 +82,7 @@ function likeNote(){
 				<div class="textArea">
 					<form>
 						<textarea class="text" cols="74" rows="8" name="" id="contents"></textarea>
-						<input class="btn" type="button" value="发表评论" name=""  onclick="getContent()"/>
+						<input class="btn" type="button" value="发表评论" onclick="postComments()"/>
 					</form>
 				</div>
 
@@ -130,7 +100,8 @@ function likeNote(){
 		</div>
 		<div class="recommend">
 			<div class="in">
-				<a class="like" id="likes" href="javascript:void(0)" onclick="likeNote()"><%-travelnote.praise_number%>人喜欢</a> <a class="coll" href="#">0人收藏</a>
+				<a class="like" id="likes" href="javascript:void(0)" onclick="likeNote()"><%-travelnote.praise_number%>人喜欢</a>
+				 <a class="coll" id="colls" href="javascript:void(0)" onclick="ConnectionTravelNotes()"><%-travelnote.collection_number%>人收藏</a>
 			</div>
 			<div class="wonderful_notes">
 				<h4>精彩游记</h4>

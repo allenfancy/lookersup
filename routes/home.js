@@ -1,6 +1,6 @@
 var Travelnotes = require('../models/travelnotes');
 module.exports = function(app) {
-	console.log('come into home page');
+	/*console.log('come into home page');
 	
 	app.get('/', function(req, res){
 		Travelnotes.find({}, null, {
@@ -18,7 +18,7 @@ module.exports = function(app) {
 			});
 		});
 		
-	});
+	});*/
 	
 	//用户发布游记
 	app.get('/user/publishTravelnotes',function(req,res){
@@ -30,7 +30,7 @@ module.exports = function(app) {
 				imageUrl:null
 			});
 		}else{
-			res.redirect('/home');
+			res.redirect('/');
 		}
 		
 	});

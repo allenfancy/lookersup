@@ -146,11 +146,28 @@ app.use(function(err, req, res, next) {
 require('./routes')(app);
 
 app.get('/', function(req, res) {
-	if (!req.session.user) {
+	console.log('come into home page ....');
+	var sessionUser = req.session.user;
+	console.log('user :  '+ sessionUser);
+	if (!sessionUser || sessionUser=='undefined') {
+		console.log('user is not exist');
 		var sid = req.cookies.sid;
-		if (!sid) {
+		console.log(sid);
+		if (!sid || sid =='undefined') {
 			res.setHeader("Set-Cookie", [ "sid="
 					+ Math.floor(Math.random() * 10000) ]);
+			Travelnotes.find({}, null, {
+				limit : 10,
+				sort : {
+					update_time : -1
+				}
+			}, function(err, docs) {
+				res.render('home', {
+					title : '主页',
+					user : req.session.user,
+					travelnotes : docs
+				});
+			});
 		}else{
 			Travelnotes.find({}, null, {
 				limit : 10,
@@ -158,7 +175,6 @@ app.get('/', function(req, res) {
 					update_time : -1
 				}
 			}, function(err, docs) {
-				// console.log(docs.length());
 				res.render('home', {
 					title : '主页',
 					user : req.session.user,
@@ -167,13 +183,15 @@ app.get('/', function(req, res) {
 			});
 		}
 	} else {
+		console.log('user login');
+		res.setHeader("Set-Cookie", [ "sid="
+		          					+ Math.floor(Math.random() * 10000) ]);
 		Travelnotes.find({}, null, {
 			limit : 10,
 			sort : {
 				update_time : -1
 			}
 		}, function(err, docs) {
-			// console.log(docs.length());
 			res.render('home', {
 				title : '主页',
 				user : req.session.user,

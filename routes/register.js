@@ -1,7 +1,9 @@
 var User = require('../models/user');
 var crypto = require('crypto');
 
-
+/***
+ * 注册
+ */
 module.exports = function(app){
 	
 	//注册，get的方法，用于点击一个链接

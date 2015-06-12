@@ -1,6 +1,8 @@
 var User = require('../models/user');
 var crypto = require('crypto');
-
+/***
+ * 登录的操作
+ */
 module.exports = function ( app ) {
 	
 	
