@@ -5,11 +5,9 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title><%=title%></title>
-<link rel="stylesheet" type="text/css" href="/stylesheets/bootstrap.min.css" />
-<link rel="stylesheet" type="text/css" href="/stylesheets/bootstrap-responsive.min.css"/>
 
-<script src="/javascripts/swfobject.js"></script>
-<script src="/javascripts/bootstrap.min.js"></script>
+<link rel="stylesheet" type="text/css" href="/stylesheets/public.css"/>
+
 
 </head>
 <body>
@@ -26,8 +24,8 @@
 				<img alt="" src="">
 			</div>	 
             <div>
-            	<p>用户名</p>
-            	<p>发布游记：0篇  收藏游记：0篇   粉丝：0人  关注：0人 	(地主、驴友)好评程度：5星</p>
+            	<p><a href="/user/userhome"><%- user.nickname%></a></p>
+            	<p>发布游记：<%-travelnotes.length%>篇  收藏游记：<%-collection_numbers%>篇   粉丝：0人  关注：0人 	(地主、驴友)好评程度：5星</p>
             </div>
             <hr>
             <p><b>个人简介</b></p>

@@ -5,26 +5,18 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title><%=title%></title>
-<link rel="stylesheet" type="text/css" href="/stylesheets/bootstrap.min.css" />
-<link rel="stylesheet" type="text/css" href="/stylesheets/bootstrap-responsive.min.css"/>
-
-<script src="/javascripts/swfobject.js"></script>
-<script src="/javascripts/bootstrap.min.js"></script>
 
 </head>
 <body>
-<div class="container">
-	<div class="row">
-		<div class="span12">
-			<%- include userCenterHeader.html %>
-		</div>
-	</div>
+<%- include userCenterHeader.html %>
+		
+
 	<div class="row">
 	
-		<div class="span2">
+		<div class="">
 				 
                 <%for(var i in travelnotes){ if(!travelnotes[i].title)continue;%>
-                        <div class="span3" >
+                        <div class="" >
                         	<a><img src="<%-travelnotes[i].cover_Image%>" ></a>
                             <a ><%=travelnotes[i].title%></a>
                             <a class="btn btn-success" style="width: 120px;" target="_blank"  href="/showDetail/<%=travelnotes[i]._id%>">查看</a>
@@ -34,11 +26,7 @@
           
 		</div>
 	</div>
-	<div class="row">
-		<div class="span12">
-			 <address><strong>@copyright for allen</strong></address>
-		</div>
-	</div>
-</div>
+	<%- include footer.html %>
+
 </body>
 </html>
