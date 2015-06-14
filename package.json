@@ -4,7 +4,9 @@
 	"private":true,
 	"author":"allen.wu",
 	"description":"this is private description",
-	
+	"scripts": {
+    	"start": "node app"
+  	},
 	"dependencies":{
 		"express":"4.10.2",
 		"body-parser":"1.9.0",

@@ -154,6 +154,7 @@ app.get('/', function(req, res) {
 		var sid = req.cookies.sid;
 		console.log(sid);
 		if (!sid || sid =='undefined') {
+			console.log('come into sid undefined');
 			res.setHeader("Set-Cookie", [ "sid="
 					+ Math.floor(Math.random() * 10000) ]);
 			Travelnotes.find({}, null, {
@@ -162,6 +163,7 @@ app.get('/', function(req, res) {
 					update_time : -1
 				}
 			}, function(err, docs) {
+				console.log('query docs:'+docs)
 				res.render('home', {
 					title : '主页',
 					user : req.session.user,
