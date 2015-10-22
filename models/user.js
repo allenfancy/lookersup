@@ -16,14 +16,13 @@ var UserSchema = new Schema({
 	 create_time:{type:Date,default:Date.now},
 	 update_time:{type:Date,default:Date.now},
 	 login_time:{type:Date,default:Date.now},
-	 login_account_type:String
+	 login_account_type:String,
+     headIcon:String
 });
 
 mongoose.model('User',UserSchema);
 
 var User = mongoose.model('User');
-
-
 
 
 module.exports = User;

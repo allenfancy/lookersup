@@ -18,10 +18,9 @@ module.exports = function(app){
 	
 	//上传图片的POST
 	app.post('/user/upload', function(req, res){  
-		console.log('wo jinglai l ');
+
 	    if (req.files && req.files.codecsv != 'undifined') {  
 	    	var image_name = commonUtils.uuid();
-	    	console.log(image_name);
 	    	res.header('Content-Type', 'text/plain');
 	    	var path = req.files.codecsv.path;	//获取用户上传过来的文件的当前路径
 	    	var sz = req.files.codecsv.size;
@@ -32,6 +31,7 @@ module.exports = function(app){
 	    	}else {
 	    		var target_path='./public/images/title/'+image_name+req.files.codecsv.name;
 	    		var show_path = '/images/title/'+image_name+req.files.codecsv.name;
+                console.log(target_path+"\br"+show_path);
 	    		imageMagick(path)
 	    		.resize(160, 120, '!') //加('!')强行把图片缩放成对应尺寸150*150！
 	    		.autoOrient()
@@ -48,11 +48,9 @@ module.exports = function(app){
 	    		});
 	    	}  	
 	    }   
-	  
 	});
 	
-	
-	
+
 	//查看詳情
 	app.get('/showDetail/:id',function(req,res){
 		console.log('id.......:'+req.params.id)

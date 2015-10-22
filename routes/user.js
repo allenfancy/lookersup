@@ -41,9 +41,4 @@ module.exports = function(app) {
 			res.redirect('/login');
 		}
 	});
-	
-	
-	
-	
-	
 }

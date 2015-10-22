@@ -22,14 +22,18 @@ var flash = require('connect-flash');
 var fs = require('fs');
 // 日志
 var logger = require('morgan');
+//
 var Travelnotes = require('./models/travelnotes');
 //富文本编辑
 var ueditor = require("ueditor");
+//授权
+var passport = require("passport");
+
 var app = express();
-
+//mongodb
 var mongodb = require('./common/db.js');
-
-var config = require('./common/config')
+//获取config配置
+var config = require('./common/config');
 
 // 设置端口
 app.set('port', process.env.PORT || 3000);
@@ -47,11 +51,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 //设置图标
 app.use(favicon(__dirname + '/public/images/favicon.ico'));
 //
-app.use(bodyParser.urlencoded({
-	extended : false
-}));
+app.use(bodyParser());
+//app.use(express.methodOverride());
+app.use(passport.initialize());
+app.use(passport.session());
 
-
+//数据库连接
 mongodb.connect(function(err){
 	if(err){
 		console.log(err);
@@ -68,14 +73,15 @@ app.on('colse',function(err){
 	})
 });
 
-
-
+//使用cookie
 app.use(cookieParser());
+//使用session
 app.use(session({
 	secret:config.session_secret,
 	key:config.email,
 	cookie:{maxAge:1000*60*60*24*30}//30day
 }));
+//使用flash
 app.use(flash());
 app.use(function(req,res,next){
 	res.locals.user = req.session.user;
@@ -90,11 +96,14 @@ app.use(function(req,res,next){
 //图片的上传路径
 app.use("/ueditor/ue", ueditor(path.join(__dirname, 'public'), function(req, res, next) {
     // ueditor 客户发起上传图片请求
+   // console.log('ueditor 客户发起上传图片请求:'+req.query.action);
     if (req.query.action === 'uploadimage') {
+
         var foo = req.ueditor;
-        
+
+        //console.log(foo);
         var imgname = req.ueditor.filename;
-        console.log(req.ueditor);
+
         console.log('imgname:'+imgname);
         var img_url = '/images/ueditor/' ;
         res.ue_up(img_url); //你只要输入要保存的地址 。保存操作交给ueditor来做
@@ -112,13 +121,11 @@ app.use("/ueditor/ue", ueditor(path.join(__dirname, 'public'), function(req, res
     }
 }));
 
-
-
-
 // 日志信息
 var accessLog = fs.createWriteStream('access.log', {
 	flags : 'a'
 });
+
 //错误日志信息
 var errorLog = fs.createWriteStream('error.log', {
 	flags : 'a'
@@ -128,6 +135,7 @@ var errorLog = fs.createWriteStream('error.log', {
 app.use(logger({
 	stream : accessLog
 }));
+
 // multer
 app.use(multer({
 	dest : './public/images',
@@ -150,11 +158,11 @@ app.get('/', function(req, res) {
 	var sessionUser = req.session.user;
 	console.log('user :  '+ sessionUser);
 	if (!sessionUser || sessionUser=='undefined') {
-		console.log('user is not exist');
+		//console.log('user is not exist');
 		var sid = req.cookies.sid;
-		console.log(sid);
+		//console.log(sid);
 		if (!sid || sid =='undefined') {
-			console.log('come into sid undefined');
+			//console.log('come into sid undefined');
 			res.setHeader("Set-Cookie", [ "sid="
 					+ Math.floor(Math.random() * 10000) ]);
 			Travelnotes.find({}, null, {
@@ -163,7 +171,7 @@ app.get('/', function(req, res) {
 					update_time : -1
 				}
 			}, function(err, docs) {
-				console.log('query docs:'+docs)
+				//console.log('query docs:'+docs)
 				res.render('home', {
 					title : '主页',
 					user : req.session.user,
@@ -185,7 +193,7 @@ app.get('/', function(req, res) {
 			});
 		}
 	} else {
-		console.log('user login');
+		//console.log('user login');
 		res.setHeader("Set-Cookie", [ "sid="
 		          					+ Math.floor(Math.random() * 10000) ]);
 		Travelnotes.find({}, null, {
@@ -205,6 +213,5 @@ app.get('/', function(req, res) {
 
 // 端口
 http.createServer(app).listen(app.get('port'), function(req,res) {
-	
 	console.log('lookersup server listening on port : ' + app.get('port'));
 });

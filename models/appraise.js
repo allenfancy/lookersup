@@ -7,7 +7,7 @@ var Schema = mongoose.Schema;
 
 //评价模型
 var AppraiseSchema = new Schema({
-	stars:{type:Number,default:0}
+	stars:{type:Number,default:0},
 	content:{type:String},
 	comment_user_id:{type:String}
 });
